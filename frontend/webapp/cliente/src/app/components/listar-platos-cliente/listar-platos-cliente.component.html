@@ -1,0 +1,48 @@
+<div class="containter mt-5">
+    <div class="row">
+        <div class ="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">PLATOS</span>
+                    <button class="btn btn-success float-start" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/pagina-principal-cliente">ATRAS</button>
+                    <table  *ngIf ="listPlatos.length > 0" class="table table-striped mt-4">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">AptoVeganos</th>
+                            <th scope="col">idRestaurante</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let plato of listPlatos">
+                            <td>{{ plato.nombre}}</td>
+                            <td>
+                              <div >
+                                <img src="{{plato.foto}}" alt="No se puede cargar la imagen del plato">
+
+                              </div>
+                              
+                            </td>
+                            <td>{{ plato.descripcion }}</td>
+                            <td>{{ plato.precio }}</td>
+                            <td>{{ plato.aptoVeganos }}</td>
+                            <td>--------------------</td>
+                            <td>                                
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr>
+                      <h5 style=" margin-top: 10px;" *ngIf ="listPlatos.length == 0">NO HAY PLATOS GUARDADOS</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
