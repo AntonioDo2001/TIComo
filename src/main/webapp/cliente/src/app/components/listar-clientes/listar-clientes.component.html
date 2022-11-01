@@ -1,0 +1,49 @@
+<div class="containter mt-5">
+    <div class="row">
+        <div class ="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">CLIENTES</span>
+                    <button class="btn btn-success float-end" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/crear-cliente">NUEVO</button>
+                    <button class="btn btn-success float-start" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/pagina-principal">ATRAS</button>
+                    <table *ngIf ="listClientes.length > 0" class="table table-striped mt-4">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">NIF</th>
+                            <th scope="col">Direccion Completa</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let cliente of listClientes">
+                            <td>{{ cliente.nombre}}</td>
+                            <td>{{ cliente.apellidos }}</td>
+                            <td>{{ cliente.nif }}</td>
+                            <td>{{ cliente.direccionCompleta }}</td>
+                            <td>{{ cliente.telefono }}</td>
+                            <td>{{ cliente.email }}</td>
+                            <td>*************</td>
+                            <td>
+                                <i [routerLink]="['/editar-cliente', cliente.id]" class="fa-solid fa-user-pen text-primary"></i>
+                                <i (click)="eliminarCliente(cliente.id)" class="fa-solid fa-trash text-danger"></i>
+                                
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr>
+                      <h5 style=" margin-top: 10px;" *ngIf ="listClientes.length == 0">NO HAY CLIENTES GUARDADOS</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
