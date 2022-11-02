@@ -27,6 +27,7 @@ import com.TIComoApp.TIComo.repository.RiderRepository;
 @RequestMapping("ticomo/authentication")
 public class AuthenticationController {
 	static final  String ERRPWD= "errorPassword";
+	static final  String ERREMAIL= "emailRepetido";
 
 
 	@Autowired
@@ -44,8 +45,19 @@ public class AuthenticationController {
 		if(cliente.contraseniaSegura(cliente.getPassword())) {
 			String passwordCliente = cliente.getPassword();
 			cliente.setPassword(BCrypt.hashpw(passwordCliente, BCrypt.gensalt()));
+			List<Cliente> listaClientes = clienteRepository.findAll();
+			boolean emailRepetido = false;
+			for(int i=0;i<listaClientes.size();i++) {
+				if(listaClientes.get(i).getEmail().equalsIgnoreCase(cliente.getEmail())) {
+					emailRepetido = true;
+				}
+			}
+			if(emailRepetido) {
+				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
+			}else {
+				return clienteRepository.save(cliente);
+			}
 			
-			return clienteRepository.save(cliente);
 		}
 		else {
 			return new Cliente(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
