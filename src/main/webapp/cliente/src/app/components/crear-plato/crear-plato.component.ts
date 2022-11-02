@@ -61,9 +61,6 @@ export class CrearPlatoComponent implements OnInit {
     else if(this.platosForm.get('idRestaurante')?.value == ""){
       this.toastr.error('Debes introducir un id de restaurante', 'CAMPO ID RESTAURANTE SIN RELLENAR');
     }
-    else if(this.platosForm.get('aptoVeganos')?.value == ""){
-      this.toastr.error('Debes introducir si el plato es apto para veganos', 'CAMPO APTO VEGANOS SIN RELLENAR');
-    }
     else{
       camposRellenos = true;
     }

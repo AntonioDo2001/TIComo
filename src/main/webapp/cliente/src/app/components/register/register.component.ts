@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister():void {
+    let camposRellenos = false;
     var CLIENTE = new Cliente(this.registerForm.get('nombre')?.value,this.registerForm.get('apellidos')?.value,this.registerForm.get('nif')?.value,
     this.registerForm.get('direccionCompleta')?.value,this.registerForm.get('telefono')?.value,this.registerForm.get('email')?.value,this.registerForm.get('password')?.value
     )
@@ -54,25 +55,37 @@ export class RegisterComponent implements OnInit {
     else if(this.registerForm.get('password')?.value == ""){
       this.toastr.error('Debes introducir un password', 'CAMPO PASSWORD SIN RELLENAR');
     }
+    else{
+      camposRellenos = true;
+    }
 
-    this.authenticationService.registerCliente(CLIENTE).subscribe(res =>{
+    if(camposRellenos){
+      this.authenticationService.registerCliente(CLIENTE).subscribe(res =>{
 
-      var jsonRespuesta : JSON = res;
-        var respuesta : string = JSON.stringify(jsonRespuesta);
-        if(respuesta.includes("errorPassword")){
-         this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
-         this.registerForm.get('password')?.reset;
-        }
-        else{
-          this.router.navigate(['/login']);
-          this.toastr.success('Usuario creado correctamente', 'REGISTRO EXITOSO');
-        }
+        var jsonRespuesta : JSON = res;
+          var respuesta : string = JSON.stringify(jsonRespuesta);
+          if(respuesta.includes("errorPassword")){
+           this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
+           this.registerForm.get('password')?.reset;
+          }
+          else if(respuesta.includes("emailRepetido")){
+            this.toastr.error('El email introducido ya ha sido registrado por un cliente', 'EMAIL EXISTENTE');
+          }
+          else{
+            this.router.navigate(['/login']);
+            this.toastr.success('Usuario creado correctamente', 'REGISTRO EXITOSO');
+          }
+  
+      } , error => {
+        
+        console.log(error)
+        this.toastr.error('Ha habido un error con el registro(Correo ya registrado o datos mal introducidos', 'REGISTRO INCORRECTO');
+      });
 
-    } , error => {
-      
-      console.log(error)
-      this.toastr.error('Ha habido un error con el registro(Correo ya registrado o datos mal introducidos)', 'REGISTRO INCORRECTO');
-    });
+    }else{
+      this.toastr.error('Hay campos sin rellenar', 'HAY CAMPOS INCOMPLETOS');
+    }
+    
   }
 
 }

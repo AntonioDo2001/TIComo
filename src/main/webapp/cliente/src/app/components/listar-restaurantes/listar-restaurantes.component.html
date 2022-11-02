@@ -29,7 +29,7 @@
                             <td>{{ restaurante.email }}</td>
                             <td>{{ restaurante.categoria }}</td>
                             <td>
-                                <i [routerLink]="['/editar-restaurante', restaurante.id]" class="fa-solid fa-user-pen text-primary"></i>
+                                <i [routerLink]="['/editar-restaurante', restaurante.id]" class="fa-solid fa-pen-to-square text-primary"></i>
                                 <i (click)="eliminarRestaurante(restaurante.id)" class="fa-solid fa-trash text-danger"></i>
                                 <i (click)="enviaridRestaurantePlato(restaurante.id)" [routerLink]="['/crear-plato']"  class="fa-solid fa-bowl-food text-primary"></i>
                               
