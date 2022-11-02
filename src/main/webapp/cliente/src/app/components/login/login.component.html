@@ -5,6 +5,7 @@
               <div class="card-body text-center">
                   <span class="titulo">LOGIN</span>
                   <button routerLink ="/register" class="btn btn-secondary btn-lg float-end" style=" border-color: white; color: white ;background-color:#e8882a;">REGISTRAR</button>
+                  <button routerLink ="/pantallaInicial" class="btn btn-secondary btn-lg float-start" style=" border-color: white; color: white ;background-color:#e8882a;">ATRAS</button>
                   <form class="mt-3"  [formGroup]="loginForm" (ngSubmit)="onLogin()">
                         <div class="mb-3">                           
                           <input type="email" formControlName="email"

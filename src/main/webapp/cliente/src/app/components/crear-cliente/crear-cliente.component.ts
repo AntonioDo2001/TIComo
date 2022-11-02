@@ -77,6 +77,9 @@ export class CrearClienteComponent implements OnInit {
            this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
            this.clienteForm.get('password')?.reset;
           }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
           else{
             this.toastr.info('El Cliente ha sido modificado correctamente!', 'CLIENTE MODIFICADO');
             this.router.navigate(['/listar-clientes']);
@@ -95,6 +98,9 @@ export class CrearClienteComponent implements OnInit {
            this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
            this.clienteForm.get('password')?.reset;
           }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
           else{
             this.toastr.success('El Cliente introducido se ha guardado correctamente!', 'CLIENTE GUARDADO');
             this.router.navigate(['/listar-clientes']);

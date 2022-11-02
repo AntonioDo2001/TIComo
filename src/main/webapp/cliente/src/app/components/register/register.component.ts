@@ -64,12 +64,16 @@ export class RegisterComponent implements OnInit {
 
         var jsonRespuesta : JSON = res;
           var respuesta : string = JSON.stringify(jsonRespuesta);
+          console.log(respuesta);
           if(respuesta.includes("errorPassword")){
            this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
            this.registerForm.get('password')?.reset;
           }
           else if(respuesta.includes("emailRepetido")){
             this.toastr.error('El email introducido ya ha sido registrado por un cliente', 'EMAIL EXISTENTE');
+          }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
           }
           else{
             this.router.navigate(['/login']);

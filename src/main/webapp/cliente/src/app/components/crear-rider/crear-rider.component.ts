@@ -71,10 +71,16 @@ export class CrearRiderComponent implements OnInit {
           var jsonRespuesta : JSON = data;
           var respuesta : string = JSON.stringify(jsonRespuesta);
           
-          if(respuesta.includes("errorPassword")){
+          if(respuesta.includes("errorMatricula")){
+            this.toastr.error('Formato de matrícula incorrecto, tiene que tener 4 numeros y 4 letras', 'FORMATO DE MATRICULA INCORRECTA');
+           }
+          else if(respuesta.includes("errorPassword")){
            this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
            this.riderForm.get('password')?.reset;
           }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
           else{
             this.toastr.info('El Rider ha sido modificado correctamente!', 'RIDER MODIFICADO');
             this.router.navigate(['/listar-riders']);
@@ -92,10 +98,16 @@ export class CrearRiderComponent implements OnInit {
           var jsonRespuesta : JSON = data;
           var respuesta : string = JSON.stringify(jsonRespuesta);
   
-          if(respuesta.includes("errorPassword")){
+          if(respuesta.includes("errorMatricula")){
+            this.toastr.error('Formato de matrícula incorrecto, tiene que tener 4 numeros y 4 letras', 'FORMATO DE MATRICULA INCORRECTA');
+           }
+          else if(respuesta.includes("errorPassword")){
            this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
            this.riderForm.get('password')?.reset;
           }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
           else{
             this.toastr.success('El Rider introducido se ha guardado correctamente!', 'RIDER GUARDADO');
             this.router.navigate(['/listar-riders']);
