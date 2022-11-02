@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/pagina-principal']);
         }
         else if(respuesta.includes("riderLogin")){
-          this.toastr.success('Te has logeado como rider, ESTA FUNCIONALIDAD DE AÑADIRÁ EN EL SIGUIENTE SPRING :)', 'LOGIN CORRECTO');
+          this.toastr.success('Te has logeado como rider, ESTA FUNCIONALIDAD SE AÑADIRÁ EN EL SIGUIENTE SPRING :)', 'LOGIN CORRECTO');
           this.router.navigate(['/login']);
           }
 

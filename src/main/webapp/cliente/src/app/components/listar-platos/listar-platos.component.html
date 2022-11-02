@@ -30,9 +30,9 @@
                             <td>{{ plato.descripcion }}</td>
                             <td>{{ plato.precio }}</td>
                             <td>{{ plato.aptoVeganos }}</td>
-                            <td>--------------------</td>
+                            <td>{{plato.idRestaurante}}</td>
                             <td>
-                                <i [routerLink]="['/editar-plato', plato.id]" class="fa-solid fa-user-pen text-primary"></i>
+                                <i [routerLink]="['/editar-plato', plato.id]" class="fa-solid fa-pen-to-square text-primary"></i>
                                 <i (click)="eliminarPlato(plato.id)" class="fa-solid fa-trash text-danger"></i>
                                 
                             </td>
