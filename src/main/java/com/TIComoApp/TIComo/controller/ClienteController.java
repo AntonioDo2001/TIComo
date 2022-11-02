@@ -28,6 +28,7 @@ import com.TIComoApp.TIComo.repository.ClienteRepository;
 
 public class ClienteController {
 	static final  String ERRPWD= "errorPassword";
+	static final  String EMFORMERR= "emailFormato";
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -53,7 +54,11 @@ public class ClienteController {
 			String passwordCliente = cliente.getPassword();
 			cliente.setPassword(BCrypt.hashpw(passwordCliente, BCrypt.gensalt()));
 			
-			return clienteRepository.save(cliente);
+			if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
+				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
+			}else {
+				return clienteRepository.save(cliente);
+			}
 		}
 		else {
 			return new Cliente(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
@@ -77,7 +82,11 @@ public class ClienteController {
 			clienteFromDB.setEmail(cliente.getEmail());
 			clienteFromDB.setPassword(BCrypt.hashpw(cliente.getPassword(), BCrypt.gensalt()));
 			
-			return clienteRepository.save(clienteFromDB);
+			if(!cliente.formatoCorreoCorrecto(cliente.getEmail())) {
+				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
+			}else {
+				return clienteRepository.save(clienteFromDB);
+			}
 		}
 		else {
 			return new Cliente(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);

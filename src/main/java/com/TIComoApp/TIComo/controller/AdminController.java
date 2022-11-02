@@ -28,6 +28,7 @@ import com.TIComoApp.TIComo.repository.AdministradorRepository;
 
 public class AdminController {
 	static final  String ERRPWD= "errorPassword";
+	static final  String EMFORMERR= "emailFormato";
 	
 	@Autowired
 	private AdministradorRepository adminRepository;
@@ -53,7 +54,12 @@ public class AdminController {
 			String passwordAdmin = admin.getPassword();
 			admin.setPassword(BCrypt.hashpw(passwordAdmin, BCrypt.gensalt()));
 			
-			return adminRepository.save(admin);
+			if(!admin.formatoCorreoCorrecto(admin.getEmail())) {
+				return new Administrador(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
+				
+			}else {
+				return adminRepository.save(admin);
+			}
 		}
 		else {
 			return new Administrador(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
@@ -71,7 +77,11 @@ public class AdminController {
 			adminFromDB.setEmail(admin.getEmail());
 			adminFromDB.setPassword(admin.getPassword());
 			
-			return adminRepository.save(adminFromDB);
+			if(!admin.formatoCorreoCorrecto(admin.getEmail())) {
+				return new Administrador(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
+			}else {
+				return adminRepository.save(adminFromDB);
+			}
 		}
 		else {
 			return new Administrador(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);

@@ -28,6 +28,7 @@ import com.TIComoApp.TIComo.repository.RiderRepository;
 public class AuthenticationController {
 	static final  String ERRPWD= "errorPassword";
 	static final  String ERREMAIL= "emailRepetido";
+	static final  String EMFORMERR= "emailFormato";
 
 
 	@Autowired
@@ -54,7 +55,10 @@ public class AuthenticationController {
 			}
 			if(emailRepetido) {
 				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
-			}else {
+			}else if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
+				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
+			}
+			else {
 				return clienteRepository.save(cliente);
 			}
 			

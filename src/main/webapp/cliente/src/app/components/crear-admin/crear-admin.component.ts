@@ -68,6 +68,9 @@ export class CrearAdminComponent implements OnInit {
            this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
            this.adminForm.get('password')?.reset;
           }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
           else{
             this.toastr.info('El Admin ha sido modificado correctamente!', 'ADMINISTRADOR MODIFICADO');
             this.router.navigate(['/listar-admins']);
@@ -89,6 +92,9 @@ export class CrearAdminComponent implements OnInit {
            this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
            this.adminForm.get('password')?.reset;
           }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
           else{
             this.toastr.success('El Admin introducido se ha guardado correctamente!', 'ADMINISTRADOR GUARDADO');
             this.router.navigate(['/listar-admins']);

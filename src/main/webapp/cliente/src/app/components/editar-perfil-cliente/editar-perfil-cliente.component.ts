@@ -51,7 +51,6 @@ export class EditarPerfilClienteComponent implements OnInit {
     var CLIENTE = new Cliente(this.clienteForm.get('nombre')?.value,this.clienteForm.get('apellidos')?.value,this.clienteForm.get('nif')?.value,
     this.clienteForm.get('direccionCompleta')?.value,this.clienteForm.get('telefono')?.value,this.clienteForm.get('email')?.value,this.clienteForm.get('password')?.value
     )
-
     this._clienteService.editarCliente(this.id,CLIENTE).subscribe(data => {
       var jsonRespuesta : JSON = data;
         var respuesta : string = JSON.stringify(jsonRespuesta);
