@@ -29,6 +29,8 @@ import com.TIComoApp.TIComo.repository.RiderRepository;
 
 public class RiderController {
 	static final  String ERRPWD= "errorPassword";
+	static final  String EMFORMERR= "emailFormato";
+	static final  String ERRMATR= "errorMatricula";
 	
 	@Autowired
 	private RiderRepository riderRepository;
@@ -52,9 +54,15 @@ public class RiderController {
 	Rider create(@RequestBody Rider rider) {
 		if(rider.contraseniaSegura(rider.getPassword())) {
 			String passwordRider = rider.getPassword();
-			rider.setPassword(BCrypt.hashpw(passwordRider, BCrypt.gensalt()));
-			
-			return riderRepository.save(rider);
+			rider.setPassword(BCrypt.hashpw(passwordRider, BCrypt.gensalt()));	
+			if(!rider.comprobarMatricula(rider.getMatricula())) {
+				return new Rider(ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR);
+			}
+			else if(!rider.formatoCorreoCorrecto(rider.getEmail())) {
+				return new Rider(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
+			}else {
+				return riderRepository.save(rider);
+			}
 		}
 		else {
 			return new Rider(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
@@ -74,7 +82,14 @@ public class RiderController {
 			riderFromDB.setEmail(rider.getEmail());
 			riderFromDB.setPassword(rider.getPassword());
 			
-			return riderRepository.save(riderFromDB);
+			if(!rider.comprobarMatricula(rider.getMatricula())) {
+				return new Rider(ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR);
+			}
+			else if(!rider.formatoCorreoCorrecto(rider.getEmail())) {
+				return new Rider(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
+			}else {
+				return riderRepository.save(riderFromDB);
+			}
 		}
 		else {
 			return new Rider(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
