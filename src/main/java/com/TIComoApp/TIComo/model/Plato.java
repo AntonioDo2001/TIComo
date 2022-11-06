@@ -23,17 +23,17 @@ public class Plato {
 	@NonNull
 	private boolean aptoVeganos;
 	@NonNull
-	private String idRestaurante;
+	private String nombreRestaurante;
 	
 	public Plato(String id, String nombre, String foto, String descripcion, double precio, boolean aptoVeganos,
-			String idRestaurante) {
+			String nombreRestaurante) {
 		this.id = id;
 		this.nombre = nombre;
 		this.foto = foto;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.aptoVeganos = aptoVeganos;
-		this.idRestaurante = idRestaurante;
+		this.nombreRestaurante = nombreRestaurante;
 	}
 
 	public String getId() {
@@ -84,18 +84,18 @@ public class Plato {
 		this.aptoVeganos = aptoVeganos;
 	}
 
-	public String getIdRestaurante() {
-		return idRestaurante;
+	public String getNombreRestaurante() {
+		return nombreRestaurante;
 	}
 
-	public void setIdRestaurante(String idRestaurante) {
-		this.idRestaurante = idRestaurante;
+	public void setNombreRestaurante(String nombreRestaurante) {
+		this.nombreRestaurante = nombreRestaurante;
 	}
 
 	@Override
 	public String toString() {
 		return "Plato [id=" + id + ", nombre=" + nombre + ", foto=" + foto + ", descripcio=" + descripcion + ", precio="
-				+ precio + ", aptoVeganos=" + aptoVeganos + ", idRestaurante=" + idRestaurante + "]";
+				+ precio + ", aptoVeganos=" + aptoVeganos + ", idRestaurante=" + nombreRestaurante + "]";
 	}
 
 	

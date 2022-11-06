@@ -1,5 +1,8 @@
 package com.TIComoApp.TIComo.model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -110,6 +113,32 @@ public class Restaurante {
 				+ ", direccionCompleta=" + direccionCompleta + ", telefono=" + telefono + ", email=" + email
 				+ ", categoria=" + categoria + "]";
 	}
+	
+	public boolean telefonoValido(String telefono) {
+		if(telefono.length() == 9) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public boolean formatoCorreoCorrecto(String email) {
+		// Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+ 
+        // El email a validar
+ 
+        Matcher mather = pattern.matcher(email);
+ 
+        if (mather.find() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    
+    }
 	
 	
 	

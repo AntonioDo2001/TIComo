@@ -27,7 +27,9 @@ import com.TIComoApp.TIComo.repository.RiderRepository;
 @RequestMapping("ticomo/authentication")
 public class AuthenticationController {
 	static final  String ERRPWD= "errorPassword";
-
+	static final  String ERREMAIL= "emailRepetido";
+	static final  String EMFORMERR= "emailFormato";
+	static final  String ERRORTLF= "tlfFormErr";
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -44,8 +46,25 @@ public class AuthenticationController {
 		if(cliente.contraseniaSegura(cliente.getPassword())) {
 			String passwordCliente = cliente.getPassword();
 			cliente.setPassword(BCrypt.hashpw(passwordCliente, BCrypt.gensalt()));
+			List<Cliente> listaClientes = clienteRepository.findAll();
+			boolean emailRepetido = false;
+			for(int i=0;i<listaClientes.size();i++) {
+				if(listaClientes.get(i).getEmail().equalsIgnoreCase(cliente.getEmail())) {
+					emailRepetido = true;
+				}
+			}
+			if(emailRepetido) {
+				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
+			}else if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
+				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
+			}
+			else if(!cliente.telefonoValido(cliente.getTelefono())) {
+				return new Cliente(ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF); 
+			}
+			else {
+				return clienteRepository.save(cliente);
+			}
 			
-			return clienteRepository.save(cliente);
 		}
 		else {
 			return new Cliente(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
