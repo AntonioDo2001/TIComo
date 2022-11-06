@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HelperService } from 'src/app/models/HelperService';
 import { Plato } from 'src/app/models/Plato';
+import { Restaurante } from 'src/app/models/Restaurante';
 import { PlatoService } from 'src/app/services/plato.service';
+import { RestauranteService } from 'src/app/services/restaurante.service';
 
 @Component({
   selector: 'app-crear-plato',
@@ -15,32 +17,33 @@ export class CrearPlatoComponent implements OnInit {
   platosForm: FormGroup;
   titulo = 'CREAR PLATO';
   id : String;
-  idRestaurante: String = "";
+  nombreRestaurante : String = "";
+  restauranteObtenido : Restaurante | undefined;
 
   constructor(private fbuilder: FormBuilder, private router:Router, private toastr: ToastrService, private _platoService:PlatoService,
-    private aRouter: ActivatedRoute,private helper: HelperService) { 
+    private aRouter: ActivatedRoute,private helper: HelperService, private _restauranteService:RestauranteService) { 
     this.platosForm = this.fbuilder.group({
       nombre: ['', Validators.required],
       foto: ['', Validators.required],
       descripcion: ['', Validators.required],
       precio: ['', Validators.required],
-      aptoVeganos: ['', Validators.required],
-      idRestaurante: ['', Validators.required]
+      aptoVeganos: [false, Validators.requiredTrue],
+      nombreRestaurante: ['', Validators.required]
 
     })
     this.id = this.aRouter.snapshot.paramMap.get('id')!;
   }
 
   ngOnInit(): void {
-    this.helper.customMessage.subscribe(msg => this.idRestaurante = msg);
-    console.log(this.idRestaurante);
+    this.helper.customMessage.subscribe(msg => this.nombreRestaurante = msg);
+    console.log(this.nombreRestaurante);
     this.platosForm.setValue({
       nombre: "",
       foto: "",
       descripcion: "",
       precio: "",
       aptoVeganos: "",
-      idRestaurante: this.idRestaurante
+      nombreRestaurante: this.nombreRestaurante
     })
     this.esEditar();
   }
@@ -58,18 +61,15 @@ export class CrearPlatoComponent implements OnInit {
     else if(this.platosForm.get('precio')?.value == ""){
       this.toastr.error('Debes introducir un precio', 'CAMPO PRECIO SIN RELLENAR');
     }
-    else if(this.platosForm.get('idRestaurante')?.value == ""){
+    else if(this.platosForm.get('nombreRestaurante')?.value == ""){
       this.toastr.error('Debes introducir un id de restaurante', 'CAMPO ID RESTAURANTE SIN RELLENAR');
-    }
-    else if(this.platosForm.get('aptoVeganos')?.value == ""){
-      this.toastr.error('Debes introducir si el plato es apto para veganos', 'CAMPO APTO VEGANOS SIN RELLENAR');
     }
     else{
       camposRellenos = true;
     }
     
     var PLATO = new Plato(this.platosForm.get('nombre')?.value,this.platosForm.get('foto')?.value,this.platosForm.get('descripcion')?.value,this.platosForm.get('precio')?.value,
-    this.platosForm.get('aptoVeganos')?.value, this.platosForm.get('idRestaurante')?.value)
+    this.platosForm.get('aptoVeganos')?.value, this.platosForm.get('nombreRestaurante')?.value)
 
     if(this.id !==null){
       console.log("Estamos en editar");
@@ -78,7 +78,7 @@ export class CrearPlatoComponent implements OnInit {
       //editamos Plato
       if(camposRellenos){
         this._platoService.editarPlato(this.id,PLATO).subscribe(data => {
-        this.idRestaurante = "";
+        this.nombreRestaurante = "";
         this.helper.changeMessage("");
         this.toastr.info('El Plato ha sido modificado correctamente!', 'PLATO MODIFICADO');
         this.router.navigate(['/listar-platos']);
@@ -97,7 +97,7 @@ export class CrearPlatoComponent implements OnInit {
       console.log(PLATO);
       if(camposRellenos){
         this._platoService.guardarPlato(PLATO).subscribe(data => {
-          this.idRestaurante = "";
+          this.nombreRestaurante = "";
           this.helper.changeMessage("");
           this.toastr.success('El Plato introducido se ha guardado correctamente!', 'PLATO GUARDADO');
           this.router.navigate(['/listar-platos']);
@@ -116,7 +116,7 @@ export class CrearPlatoComponent implements OnInit {
     
   }
 
-  vaciarIdRestaurante(){
+  vaciarNombreRestaurante(){
     this.helper.changeMessage("");
   }
 
@@ -130,7 +130,7 @@ export class CrearPlatoComponent implements OnInit {
           descripcion: data.descripcion,
           precio: data.precio,
           aptoVeganos: data.aptoVeganos,
-          idRestaurante: data.idRestaurante
+          nombreRestaurante: data.nombreRestaurante
         })
       })
     }

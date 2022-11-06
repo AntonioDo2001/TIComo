@@ -4,7 +4,6 @@
             <div class="card">
                 <div class="card-body text-center">
                     <span class="titulo">PLATOS</span>
-                    <button class="btn btn-success float-end" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/crear-plato">NUEVO</button>
                     <button class="btn btn-success float-start" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/pagina-principal">ATRAS</button>
                     <table  *ngIf ="listPlatos.length > 0" class="table table-striped mt-4">
                         <thead>
@@ -14,7 +13,7 @@
                             <th scope="col">Descripcion</th>
                             <th scope="col">Precio</th>
                             <th scope="col">AptoVeganos</th>
-                            <th scope="col">idRestaurante</th>
+                            <th scope="col">nombreRestaurante</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -29,10 +28,11 @@
                             </td>
                             <td>{{ plato.descripcion }}</td>
                             <td>{{ plato.precio }}</td>
-                            <td>{{ plato.aptoVeganos }}</td>
-                            <td>--------------------</td>
+                            <td *ngIf = "plato.aptoVeganos == true"><input type="checkbox" checked disabled /></td>
+                            <td *ngIf = "plato.aptoVeganos == false"><input type="checkbox" disabled  /></td>
+                            <td>{{plato.nombreRestaurante}}</td>
                             <td>
-                                <i [routerLink]="['/editar-plato', plato.id]" class="fa-solid fa-user-pen text-primary"></i>
+                                <i [routerLink]="['/editar-plato', plato.id]" class="fa-solid fa-pen-to-square text-primary"></i>
                                 <i (click)="eliminarPlato(plato.id)" class="fa-solid fa-trash text-danger"></i>
                                 
                             </td>

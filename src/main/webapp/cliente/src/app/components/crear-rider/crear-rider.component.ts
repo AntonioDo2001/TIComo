@@ -35,7 +35,8 @@ export class CrearRiderComponent implements OnInit {
     this.esEditar();
   }
   agregarRider(){
-    console.log(this.riderForm)
+    let camposRellenos = false;
+   
     /*console.log(this.riderForm.get('Nombre')?.value);*/
     if(this.riderForm.get('nombre')?.value == ""){
       this.toastr.error('Debes introducir un nombre', 'CAMPO NOMBRE SIN RELLENAR');
@@ -54,59 +55,74 @@ export class CrearRiderComponent implements OnInit {
     }
     else if(this.riderForm.get('password')?.value == ""){
       this.toastr.error('Debes introducir un password', 'CAMPO PASSWORD SIN RELLENAR');
+    }else{
+      camposRellenos = true;
     }
     
     var RIDER = new Rider(this.riderForm.get('nombre')?.value,this.riderForm.get('apellidos')?.value,this.riderForm.get('nif')?.value,
     this.riderForm.get('tipoVehiculo')?.value,this.riderForm.get('matricula')?.value,this.riderForm.get('carnet')?.value,this.riderForm.get('email')?.value,this.riderForm.get('password')?.value
     )
 
+    if(camposRellenos){
+      if(this.id !==null){
+        //editamos Rider
+        this._riderService.editarRider(this.id,RIDER).subscribe(data => {
+  
+          var jsonRespuesta : JSON = data;
+          var respuesta : string = JSON.stringify(jsonRespuesta);
+          
+          if(respuesta.includes("errorMatricula")){
+            this.toastr.error('Formato de matrícula incorrecto, tiene que tener 4 numeros y 4 letras', 'FORMATO DE MATRICULA INCORRECTA');
+           }
+          else if(respuesta.includes("errorPassword")){
+           this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
+           this.riderForm.get('password')?.reset;
+          }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
+          else{
+            this.toastr.info('El Rider ha sido modificado correctamente!', 'RIDER MODIFICADO');
+            this.router.navigate(['/listar-riders']);
+          }
+  
+        }, error => {
+          console.log(error);
+          this.riderForm.reset();
+          this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR RIDER');
+        })
+      } else{
+        //agregamos Rider
+        console.log(RIDER);
+        this._riderService.guardarRider(RIDER).subscribe(data => {
+          var jsonRespuesta : JSON = data;
+          var respuesta : string = JSON.stringify(jsonRespuesta);
+  
+          if(respuesta.includes("errorMatricula")){
+            this.toastr.error('Formato de matrícula incorrecto, tiene que tener 4 numeros y 4 letras', 'FORMATO DE MATRICULA INCORRECTA');
+           }
+          else if(respuesta.includes("errorPassword")){
+           this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
+           this.riderForm.get('password')?.reset;
+          }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
+          else{
+            this.toastr.success('El Rider introducido se ha guardado correctamente!', 'RIDER GUARDADO');
+            this.router.navigate(['/listar-riders']);
+          }
+        }, error => {
+          console.log(error);
+          this.riderForm.reset();
+          this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR RIDER');
+        })
+      }
 
-    if(this.id !==null){
-      //editamos Rider
-      this._riderService.editarRider(this.id,RIDER).subscribe(data => {
-
-        var jsonRespuesta : JSON = data;
-        var respuesta : string = JSON.stringify(jsonRespuesta);
-        
-        if(respuesta.includes("errorPassword")){
-         this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
-         this.riderForm.get('password')?.reset;
-        }
-        else{
-          this.toastr.info('El Rider ha sido modificado correctamente!', 'RIDER MODIFICADO');
-          this.router.navigate(['/listar-riders']);
-        }
-
-      }, error => {
-        console.log(error);
-        this.riderForm.reset();
-        this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR RIDER');
-      })
-    } else{
-      //agregamos Rider
-      console.log(RIDER);
-      this._riderService.guardarRider(RIDER).subscribe(data => {
-        var jsonRespuesta : JSON = data;
-        var respuesta : string = JSON.stringify(jsonRespuesta);
-
-        if(respuesta.includes("errorPassword")){
-         this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
-         this.riderForm.get('password')?.reset;
-        }
-        else{
-          this.toastr.success('El Rider introducido se ha guardado correctamente!', 'RIDER GUARDADO');
-          this.router.navigate(['/listar-riders']);
-        }
-
-
-
-
-      }, error => {
-        console.log(error);
-        this.riderForm.reset();
-        this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR RIDER');
-      })
+    }else{
+      this.toastr.error('Aun quedan campos sin rellenar', 'CAMPOS SIN RELLENAR');
     }
+    
 
     
   }

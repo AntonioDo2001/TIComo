@@ -23,7 +23,7 @@
                             <td>{{ admin.apellidos }}</td>
                             <td>{{ admin.zona }}</td>
                             <td>{{ admin.email }}</td>
-                            <td>*************</td>
+                            <td>{{ admin.password }}</td>
                             <td>
                                 <i [routerLink]="['/editar-admin', admin.id]" class="fa-solid fa-user-pen text-primary"></i>
                                 <i (click)="eliminarAdmin(admin.id)" class="fa-solid fa-trash text-danger"></i>

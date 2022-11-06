@@ -9,7 +9,7 @@
                           <input type="text" formControlName="nombre"
                           class="form-control form-control-lg" placeholder="Nombre">
                           <div class="text-danger" 
-                              *ngIf="registerForm.get('nombre')?.hasError('required') && registerForm.get('nombre')?.touched">
+                              *ngIf="registerForm.get('nombre')?.hasError('required') ">
                               <span>El campo Nombre del cliente <strong> ES OBLIGATORIO</strong></span>
                           </div>
                         </div>
@@ -17,7 +17,7 @@
                           <input type="text" formControlName="apellidos"
                           class="form-control form-control-lg" placeholder="Apellidos">
                           <div class="text-danger" 
-                              *ngIf="registerForm.get('apellidos')?.hasError('required') && registerForm.get('apellidos')?.touched">
+                              *ngIf="registerForm.get('apellidos')?.hasError('required')">
                               <span>El campo Apellidos del cliente <strong> ES OBLIGATORIO</strong></span>
                           </div>
                         </div>
@@ -25,7 +25,7 @@
                           <input type="text" formControlName="nif"
                           class="form-control form-control-lg" placeholder="NIF">
                           <div class="text-danger" 
-                              *ngIf="registerForm.get('nif')?.hasError('required') && registerForm.get('nif')?.touched">
+                              *ngIf="registerForm.get('nif')?.hasError('required') ">
                               <span>El campo NIF del cliente <strong> ES OBLIGATORIO</strong></span>
                           </div>
                         </div>
@@ -33,16 +33,16 @@
                           <input type="text" formControlName="direccionCompleta"
                           class="form-control form-control-lg" placeholder="Dirección Completa">
                           <div class="text-danger" 
-                              *ngIf="registerForm.get('direccionCompleta')?.hasError('required') && registerForm.get('direccionCompleta')?.touched">
+                              *ngIf="registerForm.get('direccionCompleta')?.hasError('required') ">
                               <span>El campo DireccionCompleta del cliente <strong> ES OBLIGATORIO</strong></span>
                           </div>
                         </div>
 
                         <div class="mb-3">                           
-                          <input type="text" formControlName="telefono"
+                          <input type="number" formControlName="telefono"
                           class="form-control form-control-lg" placeholder="Teléfono">
                           <div class="text-danger" 
-                              *ngIf="registerForm.get('telefono')?.hasError('required') && registerForm.get('telefono')?.touched">
+                              *ngIf="registerForm.get('telefono')?.hasError('required') ">
                               <span>El campo Telefono del cliente <strong> ES OBLIGATORIO</strong></span>
                           </div>
                         </div>
@@ -52,7 +52,7 @@
                           <input type="email" formControlName="email"
                           class="form-control form-control-lg " placeholder="Email">
                           <div class="text-danger" 
-                              *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+                              *ngIf="registerForm.get('email')?.hasError('required') ">
                               <span>El campo Email del cliente <strong> ES OBLIGATORIO</strong></span>
                           </div>
                         </div>
@@ -60,7 +60,7 @@
                           <input type="password" formControlName="password"
                           class="form-control form-control-lg" placeholder="Password">
                           <div class="text-danger" 
-                              *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+                              *ngIf="registerForm.get('password')?.hasError('required') ">
                               <span>El campo Password del cliente <strong> ES OBLIGATORIO</strong></span>
                           </div>
                         </div>

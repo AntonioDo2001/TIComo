@@ -9,7 +9,7 @@
                             <input type="text" formControlName="nombre"
                             class="form-control form-control-lg" placeholder="Nombre">
                             <div class="text-danger" 
-                                *ngIf="riderForm.get('nombre')?.hasError('required') && riderForm.get('nombre')?.touched">
+                                *ngIf="riderForm.get('nombre')?.hasError('required') ">
                                 <span>El campo Nombre del rider <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -17,7 +17,7 @@
                             <input type="text" formControlName="apellidos"
                             class="form-control form-control-lg" placeholder="Apellidos">
                             <div class="text-danger" 
-                                *ngIf="riderForm.get('apellidos')?.hasError('required') && riderForm.get('apellidos')?.touched">
+                                *ngIf="riderForm.get('apellidos')?.hasError('required')">
                                 <span>El campo Apellidos del rider <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -25,7 +25,7 @@
                             <input type="text" formControlName="nif"
                             class="form-control form-control-lg" placeholder="NIF">
                             <div class="text-danger" 
-                                *ngIf="riderForm.get('nif')?.hasError('required') && riderForm.get('nif')?.touched">
+                                *ngIf="riderForm.get('nif')?.hasError('required')">
                                 <span>El campo NIF del rider <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -33,7 +33,7 @@
                             <input type="text" formControlName="tipoVehiculo"
                             class="form-control form-control-lg" placeholder="Tipo de Vehículo">
                             <div class="text-danger" 
-                                *ngIf="riderForm.get('tipoVehiculo')?.hasError('required') && riderForm.get('tipoVehiculo')?.touched">
+                                *ngIf="riderForm.get('tipoVehiculo')?.hasError('required')">
                                 <span>El campo TipoVehiculo del rider <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -49,7 +49,7 @@
                             <input type="email" formControlName="email"
                             class="form-control form-control-lg " placeholder="Email">
                             <div class="text-danger" 
-                                *ngIf="riderForm.get('email')?.hasError('required') && riderForm.get('email')?.touched">
+                                *ngIf="riderForm.get('email')?.hasError('required') ">
                                 <span>El campo Email del rider <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -57,7 +57,7 @@
                             <input type="password" formControlName="password"
                             class="form-control form-control-lg" placeholder="Password">
                             <div class="text-danger" 
-                                *ngIf="riderForm.get('password')?.hasError('required') && riderForm.get('password')?.touched">
+                                *ngIf="riderForm.get('password')?.hasError('required')">
                                 <span>El campo Password del rider <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>

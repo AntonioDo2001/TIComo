@@ -36,7 +36,7 @@ export class CrearClienteComponent implements OnInit {
     this.esEditar();
   }
   agregarCliente(){
-
+    let camposRellenos = false;
     if(this.clienteForm.get('nombre')?.value == ""){
       this.toastr.error('Debes introducir un nombre', 'CAMPO NOMBRE SIN RELLENAR');
     }
@@ -58,54 +58,71 @@ export class CrearClienteComponent implements OnInit {
     else if(this.clienteForm.get('password')?.value == ""){
       this.toastr.error('Debes introducir un password', 'CAMPO PASSWORD SIN RELLENAR');
     }
+    else{
+      camposRellenos = true;
+    }
     
     var CLIENTE = new Cliente(this.clienteForm.get('nombre')?.value,this.clienteForm.get('apellidos')?.value,this.clienteForm.get('nif')?.value,
     this.clienteForm.get('direccionCompleta')?.value,this.clienteForm.get('telefono')?.value,this.clienteForm.get('email')?.value,this.clienteForm.get('password')?.value
     )
 
-    if(this.id !==null){
-      //editamos Cliente
-      this._clienteService.editarCliente(this.id,CLIENTE).subscribe(data => {
-        var jsonRespuesta : JSON = data;
-        var respuesta : string = JSON.stringify(jsonRespuesta);
+    if(camposRellenos){
+      if(this.id !==null){
+        //editamos Cliente
+        this._clienteService.editarCliente(this.id,CLIENTE).subscribe(data => {
+          var jsonRespuesta : JSON = data;
+          var respuesta : string = JSON.stringify(jsonRespuesta);
+          
+          if(respuesta.includes("errorPassword")){
+           this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
+           this.clienteForm.get('password')?.reset;
+          }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
+           else if(respuesta.includes("tlfFormErr")){
+            this.toastr.error('El formato del telefono es incorrecto. Debe ser un número de 9 dígitos', 'FORMATO DE TELEFONO INVÁLIDO');
+           }
+          else{
+            this.toastr.info('El Cliente ha sido modificado correctamente!', 'CLIENTE MODIFICADO');
+            this.router.navigate(['/listar-clientes']);
+          }
+        }, error => {
+          console.log(error);
+          this.clienteForm.reset();
+          this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR CLIENTE');
+        })
+      } else{
+        //agregamos Cliente
+        this._clienteService.guardarCliente(CLIENTE).subscribe(data => {
+          var jsonRespuesta : JSON = data;
+          var respuesta : string = JSON.stringify(jsonRespuesta);
+          if(respuesta.includes("errorPassword")){
+           this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
+           this.clienteForm.get('password')?.reset;
+          }
+          else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
+           else if(respuesta.includes("tlfFormErr")){
+            this.toastr.error('El formato del telefono es incorrecto. Debe ser un número de 9 dígitos', 'FORMATO DE TELEFONO INVÁLIDO');
+           }
+          else{
+            this.toastr.success('El Cliente introducido se ha guardado correctamente!', 'CLIENTE GUARDADO');
+            this.router.navigate(['/listar-clientes']);
+          }
         
-        if(respuesta.includes("errorPassword")){
-         this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
-         this.clienteForm.get('password')?.reset;
-        }
-        else{
-          this.toastr.info('El Cliente ha sido modificado correctamente!', 'CLIENTE MODIFICADO');
-          this.router.navigate(['/listar-clientes']);
-        }
+        }, error => {
+          console.log(error);
+          this.clienteForm.reset();
+          this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR CLIENTE');
+        })
+      }
 
-
-
-
-      }, error => {
-        console.log(error);
-        this.clienteForm.reset();
-        this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR CLIENTE');
-      })
-    } else{
-      //agregamos Cliente
-      this._clienteService.guardarCliente(CLIENTE).subscribe(data => {
-        var jsonRespuesta : JSON = data;
-        var respuesta : string = JSON.stringify(jsonRespuesta);
-        if(respuesta.includes("errorPassword")){
-         this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
-         this.clienteForm.get('password')?.reset;
-        }
-        else{
-          this.toastr.success('El Cliente introducido se ha guardado correctamente!', 'CLIENTE GUARDADO');
-          this.router.navigate(['/listar-clientes']);
-        }
-      
-      }, error => {
-        console.log(error);
-        this.clienteForm.reset();
-        this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR CLIENTE');
-      })
+    }else{
+      this.toastr.error('Hay campos sin rellenar', 'HAY CAMPOS INCOMPLETOS');
     }
+    
 
     
   }

@@ -29,7 +29,7 @@
                             <td>{{ rider.matricula }}</td>
                             <td>{{ rider.carnet }}</td>
                             <td>{{ rider.email }}</td>
-                            <td>*************</td>
+                            <td>{{ rider.password }}</td>
                             <td>
                                 <i [routerLink]="['/editar-rider', rider.id]" class="fa-solid fa-user-pen text-primary"></i>
                                 <i (click)="eliminarRider(rider.id)" class="fa-solid fa-trash text-danger"></i>

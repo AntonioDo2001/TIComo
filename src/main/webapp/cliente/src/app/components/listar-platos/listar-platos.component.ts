@@ -37,4 +37,12 @@ export class ListarPlatosComponent implements OnInit {
     })
   }
 
+  aptoVeganosSioNo(apto : boolean) : String{
+    if(apto){
+      return "Si";
+    }else{
+      return "No";
+    }
+  }
+
 }
