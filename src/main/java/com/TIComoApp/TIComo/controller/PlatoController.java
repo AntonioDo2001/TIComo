@@ -59,7 +59,7 @@ public class PlatoController {
 		platoFromDB.setDescripcion(plato.getDescripcion());
 		platoFromDB.setPrecio(plato.getPrecio());
 		platoFromDB.setAptoVeganos(plato.isAptoVeganos());
-		platoFromDB.setIdRestaurante(plato.getIdRestaurante());
+		platoFromDB.setNombreRestaurante(plato.getNombreRestaurante());
 		
 		
 		return platoRepository.save(platoFromDB);

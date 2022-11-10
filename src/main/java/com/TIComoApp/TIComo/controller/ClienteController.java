@@ -29,6 +29,8 @@ import com.TIComoApp.TIComo.repository.ClienteRepository;
 public class ClienteController {
 	static final  String ERRPWD= "errorPassword";
 	static final  String EMFORMERR= "emailFormato";
+	static final  String ERRORTLF= "tlfFormErr";
+	static final  String ERREMAIL= "emailRepetido";
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -53,10 +55,24 @@ public class ClienteController {
 		if(cliente.contraseniaSegura(cliente.getPassword())) {
 			String passwordCliente = cliente.getPassword();
 			cliente.setPassword(BCrypt.hashpw(passwordCliente, BCrypt.gensalt()));
+			List<Cliente> listaClientes = clienteRepository.findAll();
+			boolean emailRepetido = false;
+			for(int i=0;i<listaClientes.size();i++) {
+				if(listaClientes.get(i).getEmail().equalsIgnoreCase(cliente.getEmail())) {
+					emailRepetido = true;
+				}
+			}
+			if(emailRepetido) {
+				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
+			}
 			
-			if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
+			else if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
 				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
-			}else {
+			}
+			else if(!cliente.telefonoValido(cliente.getTelefono())) {
+				return new Cliente(ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF); 
+			}
+			else {
 				return clienteRepository.save(cliente);
 			}
 		}
@@ -82,9 +98,24 @@ public class ClienteController {
 			clienteFromDB.setEmail(cliente.getEmail());
 			clienteFromDB.setPassword(BCrypt.hashpw(cliente.getPassword(), BCrypt.gensalt()));
 			
-			if(!cliente.formatoCorreoCorrecto(cliente.getEmail())) {
-				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
-			}else {
+			List<Cliente> listaClientes = clienteRepository.findAll();
+			boolean emailRepetido = false;
+			for(int i=0;i<listaClientes.size();i++) {
+				if(listaClientes.get(i).getEmail().equalsIgnoreCase(cliente.getEmail())) {
+					emailRepetido = true;
+				}
+			}
+			if(emailRepetido) {
+				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
+			}
+			
+			else if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
+				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
+			}
+			else if(!cliente.telefonoValido(cliente.getTelefono())) {
+				return new Cliente(ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF); 
+			}
+			else {
 				return clienteRepository.save(clienteFromDB);
 			}
 		}
