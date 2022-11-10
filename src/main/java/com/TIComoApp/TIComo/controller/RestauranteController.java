@@ -28,6 +28,9 @@ import com.TIComoApp.TIComo.repository.RestauranteRepository;
 
 public class RestauranteController {
 	
+	static final  String ERRORTLF= "tlfFormErr";
+	static final  String EMFORMERR= "emailFormato";
+	
 	@Autowired
 	private RestauranteRepository restauranteRepository;
 		
@@ -48,23 +51,37 @@ public class RestauranteController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
 	Restaurante create(@RequestBody Restaurante restaurante) {
-		return restauranteRepository.save(restaurante);
+		if(!restaurante.telefonoValido(restaurante.getTelefono())) {
+			return new Restaurante(ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF);
+		}else if(!restaurante.formatoCorreoCorrecto(restaurante.getEmail())) {
+			return new Restaurante(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
+		}
+		else {
+			return restauranteRepository.save(restaurante);
+		}
+		
 	}
 	
 	@PutMapping("/{id}")
 	Restaurante update(@PathVariable String id, @RequestBody Restaurante restaurante) {
 		Restaurante restauranteFromDB = restauranteRepository.findById(id).orElseThrow(RuntimeException::new);
+		if(!restaurante.telefonoValido(restaurante.getTelefono())) {
+			return new Restaurante(ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF);
+		}
+		else {
+			restauranteFromDB.setNombre(restaurante.getNombre());
+			restauranteFromDB.setRazonSocial(restaurante.getRazonSocial());
+			restauranteFromDB.setCIF(restaurante.getCIF());
+			restauranteFromDB.setDireccionCompleta(restaurante.getDireccionCompleta());
+			restauranteFromDB.setTelefono(restaurante.getTelefono());
+			restauranteFromDB.setEmail(restaurante.getEmail());
+			restauranteFromDB.setCategoria(restaurante.getCategoria());
+			
+			
+			return restauranteRepository.save(restauranteFromDB);
+		}
 		
-		restauranteFromDB.setNombre(restaurante.getNombre());
-		restauranteFromDB.setRazonSocial(restaurante.getRazonSocial());
-		restauranteFromDB.setCIF(restaurante.getCIF());
-		restauranteFromDB.setDireccionCompleta(restaurante.getDireccionCompleta());
-		restauranteFromDB.setTelefono(restaurante.getTelefono());
-		restauranteFromDB.setEmail(restaurante.getEmail());
-		restauranteFromDB.setCategoria(restaurante.getCategoria());
 		
-		
-		return restauranteRepository.save(restauranteFromDB);
 		
 	}
 	
