@@ -53,6 +53,15 @@ public class Cliente extends Usuario{
 	public String toString() {
 		return "Cliente [NIF=" + NIF + ", direccionCompleta=" + direccionCompleta + ", telefono=" + telefono + "]";
 	}
+	
+	public boolean telefonoValido(String telefono) {
+		if(telefono.length() == 9) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	
 
