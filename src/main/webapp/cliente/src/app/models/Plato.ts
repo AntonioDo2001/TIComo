@@ -5,16 +5,16 @@ export class Plato {
     /*private*/ descripcion: String;
     /*private*/ precio: Number;
     /*private*/ aptoVeganos: boolean;
-    /*private*/ idRestaurante: String;
+    /*private*/ nombreRestaurante: String;
     
     
-    constructor(Nombre: String, Foto: String, Descripcion: String,Precio: Number,AptoVeganos: boolean, idRestaurante:String){
+    constructor(Nombre: String, Foto: String, Descripcion: String,Precio: Number,AptoVeganos: boolean, nombreRestaurante:String){
         this.nombre = Nombre;
         this.foto = Foto;
         this.descripcion = Descripcion;
         this.precio = Precio;
         this.aptoVeganos = AptoVeganos;
-		this.idRestaurante= idRestaurante;
+		this.nombreRestaurante= nombreRestaurante;
         
     }
 	get_id(): String | undefined {
@@ -37,7 +37,7 @@ export class Plato {
 	getAptoVeganos(): boolean {
 		return this.aptoVeganos;
 	}
-	getidRestaurante(): String {
-		return this.idRestaurante;
+	getnombreRestaurante(): String {
+		return this.nombreRestaurante;
 	}
 }
