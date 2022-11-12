@@ -13,7 +13,7 @@
                             <th scope="col">Descripcion</th>
                             <th scope="col">Precio</th>
                             <th scope="col">AptoVeganos</th>
-                            <th scope="col">idRestaurante</th>
+                            <th scope="col">nombreRestaurante</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -29,8 +29,10 @@
                             <td>{{ plato.descripcion }}</td>
                             <td>{{ plato.precio }}</td>
                             <td>{{ plato.aptoVeganos }}</td>
-                            <td>--------------------</td>
-                            <td>                                
+                            <td>{{ plato.nombreRestaurante }}</td>
+                            <td>  
+                              <i [routerLink]="['/crear-pedido, plato.id']" class="fa-solid fa-motorcycle"></i> 
+                                                 
                             </td>
                           </tr>
                         </tbody>
