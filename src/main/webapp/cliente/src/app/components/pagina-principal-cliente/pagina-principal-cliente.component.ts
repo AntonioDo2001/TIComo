@@ -14,6 +14,8 @@ export class PaginaPrincipalClienteComponent implements OnInit {
   ngOnInit(): void {
     this.helper.customMessage.subscribe(msg => this.idCliente = msg);
     console.log(this.idCliente);
+    this.helper.changeMessage(this.idCliente);
+    this.helper.customMessage.subscribe(msg => this.idCliente = msg);
   }
 
   

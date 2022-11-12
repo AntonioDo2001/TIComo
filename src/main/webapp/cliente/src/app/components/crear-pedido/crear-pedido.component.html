@@ -1,0 +1,31 @@
+<div class="containter mt-5">
+    <div class="row">
+        <div class ="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">NUEVO PEDIDO</span>
+                    <form class="mt-3"  [formGroup]="pedidoForm" (ngSubmit)="agregarPedido()">
+                        <div class="mb-3">                           
+                            <input type="text" formControlName="nombrePlato"
+                            class="form-control form-control-lg" placeholder="Nombre">
+                          </div>
+                          <div class="mb-3">                           
+                            <input type ="number" formControlName= "precioPlato"
+                            class="form-control form-control-lg" placeholder="PrecioPlato">
+                          </div>
+                          <div class="mb-3">                           
+                            <input type="number" formControlName="cantidadPlato"
+                            class="form-control form-control-lg" placeholder="cantidadPlato" value="1">
+                          </div>
+                         <div class="mb-3">
+                            <button type="submit" class="btn btn-success btn-lg float-end" style=" border-color: white; color: white ;background-color:#e8882a;">GUARDAR</button>
+                            <button  routerLink ="/listar-pedidos" class="btn btn-secondary btn-lg float-start">ATRÁS</button>
+                         </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
