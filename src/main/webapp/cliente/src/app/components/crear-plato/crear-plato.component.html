@@ -9,7 +9,7 @@
                             <input type="text" formControlName="nombre"
                             class="form-control form-control-lg" placeholder="Nombre">
                             <div class="text-danger" 
-                                *ngIf="platosForm.get('nombre')?.hasError('required') && platosForm.get('nombre')?.touched">
+                                *ngIf="platosForm.get('nombre')?.hasError('required')">
                                 <span>El campo Nombre del plato <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -17,7 +17,7 @@
                             <input type ="text" formControlName= "foto"
                             class="form-control form-control-lg" placeholder="Foto">
                             <div class="text-danger" 
-                                *ngIf="platosForm.get('foto')?.hasError('required') && platosForm.get('foto')?.touched">
+                                *ngIf="platosForm.get('foto')?.hasError('required')">
                                 <span>El campo Foto del plato <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -25,7 +25,7 @@
                             <input type="text" formControlName="descripcion"
                             class="form-control form-control-lg" placeholder="Descripcion">
                             <div class="text-danger" 
-                                *ngIf="platosForm.get('descripcion')?.hasError('required') && platosForm.get('descripcion')?.touched">
+                                *ngIf="platosForm.get('descripcion')?.hasError('required')">
                                 <span>El campo Descripcion del plato <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -33,25 +33,21 @@
                             <input type="number" formControlName="precio"
                             class="form-control form-control-lg" placeholder="Precio">
                             <div class="text-danger" 
-                                *ngIf="platosForm.get('precio')?.hasError('required') && platosForm.get('precio')?.touched">
+                                *ngIf="platosForm.get('precio')?.hasError('required')">
                                 <span>El campo Precio del plato <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
                           <div class="mb-3">                           
-                            <input type="text" formControlName="aptoVeganos"
-                            class="form-control form-control-lg" placeholder="AptoVeganos">
-                            <div class="text-danger" 
-                                *ngIf="platosForm.get('aptoVeganos')?.hasError('required') && platosForm.get('aptoVeganos')?.touched">
-                                <span>El campo AptoVeganos del plato <strong> ES OBLIGATORIO</strong></span>
-                            </div>
+                            <input type="checkbox" formControlName="aptoVeganos" 
+                            class="form-check-input" placeholder="AptoVeganos"> <label>Apto Veganos</label>
                           </div>
                           <div class="mb-3">                           
-                            <input type="text" formControlName="idRestaurante"
-                            class="form-control form-control-lg" placeholder="idRestaurante">
+                            <input type="text" formControlName="nombreRestaurante"
+                            class="form-control form-control-lg" placeholder="nombreRestaurante">
                           </div>
                          <div class="mb-3">
                             <button type="submit" class="btn btn-success btn-lg float-end" style=" border-color: white; color: white ;background-color:#e8882a;">GUARDAR</button>
-                            <button (click)="vaciarIdRestaurante()" routerLink ="/listar-platos" class="btn btn-secondary btn-lg float-start">ATRÁS</button>
+                            <button (click)="vaciarNombreRestaurante()" routerLink ="/listar-platos" class="btn btn-secondary btn-lg float-start">ATRÁS</button>
                          </div>
                     </form>
                 </div>
