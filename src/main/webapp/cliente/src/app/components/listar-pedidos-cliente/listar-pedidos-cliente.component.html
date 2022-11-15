@@ -6,7 +6,7 @@
                     <span class="titulo">PEDIDOS</span>
                     <button class="btn btn-success float-end" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/listar-platos-cliente">NUEVO PEDIDO</button>
                     <button class="btn btn-success float-start" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/pagina-principal-cliente">ATRAS</button>
-                    <table *ngIf ="listPedidos.length > 0" class="table table-striped mt-4">
+                    <table *ngIf ="listPedidosSinRealizar.length > 0" class="table table-striped mt-4">
                         <thead>
                           <tr>
                             <th scope="col">Nombre</th>
@@ -17,24 +17,26 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor = "let pedido of listPedidos">
-                            <td *ngIf = "pedido.pedidoRealizado == false">{{ pedido.nombrePlato}}</td>
-                            <td *ngIf = "pedido.pedidoRealizado == false">{{ pedido.precioPlato }}</td>
-                            <td *ngIf = "pedido.pedidoRealizado == false">{{ pedido.cantidadPlato }}</td>
-                            <td *ngIf = "pedido.pedidoRealizado == false">{{ pedido.precioTotal }}</td>
+                          <tr *ngFor = "let pedido of listPedidosSinRealizar">
+                            <td>{{ pedido.nombrePlato}}</td>
+                            <td>{{ pedido.precioPlato }}</td>
+                            <td>{{ pedido.cantidadPlato }}</td>
+                            <td>{{ pedido.precioTotal }}</td>
                             <td>                                
                             </td>
                           </tr>
                         </tbody>
                       </table>
                       <hr>
-                      <h5 style=" margin-top: 10px;" *ngIf ="listPedidos.length == 0">NO HAY PEDIDOS PENDIENTES</h5>
+                      <h5 style=" margin-top: 10px;" *ngIf ="listPedidosSinRealizar.length == 0">NO HAY PEDIDOS PENDIENTES</h5>
                 </div>
+                
             </div>
+            <button class="btn btn-success float-end" (click)="pagarPedidos()"  style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/pagina-principal-cliente">PAGAR</button>
         </div>
     </div>
 
 
 
-
+    
 </div>
