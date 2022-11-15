@@ -19,6 +19,7 @@ export class CrearPedidoComponent implements OnInit {
   idPlato = "";
   nombreRestaurante : String = "";
   restauranteObtenido : Restaurante | undefined;
+  
 
   constructor(private fbuilder: FormBuilder, private router:Router, private toastr: ToastrService, private _pedidoService:PedidoService,
     private aRouter: ActivatedRoute,private helper: HelperService, private _platoService:PlatoService) { 
@@ -55,6 +56,9 @@ export class CrearPedidoComponent implements OnInit {
             console.log(error);
             this.toastr.error('Error al guardar el pedido, revise los datos', 'ERROR AL REALIZAR PEDIDO ');
           })
+
+        
+    
 
       
 
