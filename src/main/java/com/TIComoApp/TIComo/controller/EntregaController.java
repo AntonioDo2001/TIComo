@@ -1,5 +1,6 @@
 package com.TIComoApp.TIComo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.TIComoApp.TIComo.model.Entrega;
+import com.TIComoApp.TIComo.model.Pedido;
 import com.TIComoApp.TIComo.repository.EntregaRepository;
 
 @CrossOrigin
@@ -37,6 +39,20 @@ public class EntregaController {
 	}
 	
 	
+	@GetMapping("/{id}")
+	List<Entrega> obtenerEntregasCliente(@PathVariable String idCliente) {
+		List<Entrega> entregas = entregaRepository.findAll();
+		List<Entrega> entregasCliente = new ArrayList<Entrega>();		
+		for(int i=0;i<entregas.size();i++) {
+			if(entregas.get(i).getIdCliente().equals(idCliente)) {
+				entregasCliente.add(entregas.get(i));
+			}
+		}
+		return entregasCliente;
+		
+	}
+	
+	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
 	Entrega create(@RequestBody Entrega entrega) {
@@ -45,7 +61,7 @@ public class EntregaController {
 	
 	
 	@PutMapping("/{id}")
-	Entrega asignarRider(@PathVariable String id, @RequestBody Entrega entrega,  String idRider) {
+	Entrega asignarRider(@PathVariable String id, String idRider) {
 		Entrega entregaFromDB = entregaRepository.findById(id).orElseThrow(RuntimeException::new);
 		entregaFromDB.setIdRider(idRider);
 		

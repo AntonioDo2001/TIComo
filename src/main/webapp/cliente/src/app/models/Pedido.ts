@@ -41,7 +41,7 @@ export class Pedido {
 		return this.idCliente;
 	}
 
-    pedidoEntregado() : void{
+    pedidorealizado() : void{
         this.pedidoRealizado = true;
     }
 

@@ -15,6 +15,8 @@ public class Entrega {
 	@NonNull
 	private String idRider;
 	@NonNull
+	private String idCliente;
+	@NonNull
 	private String nombreCliente;
 	@NonNull
 	private String apellidosCliente;
@@ -23,16 +25,20 @@ public class Entrega {
 	@NonNull
 	private String telefonoCliente;
 	@NonNull
+	private String estado;
+	@NonNull
 	private boolean entregado;
 	
-	public Entrega(String id, String nombreCliente, String apellidosCliente, String direccion, String telefonoCliente) {
+	public Entrega(String id, String idCliente,String nombreCliente, String apellidosCliente, String direccion, String telefonoCliente) {
 		super();
 		this.id = id;
 		this.idRider = "";
+		this.idCliente = idCliente;
 		this.nombreCliente = nombreCliente;
 		this.apellidosCliente = apellidosCliente;
 		this.direccion = direccion;
 		this.telefonoCliente = telefonoCliente;
+		this.estado = "listo";
 		this.entregado = false;
 	}
 
@@ -82,6 +88,18 @@ public class Entrega {
 
 	public void setEntregado(boolean entregado) {
 		this.entregado = entregado;
+	}
+	public String getIdCliente() {
+		return idCliente;
+	}
+	public void setIdCliente(String idCliente) {
+		this.idCliente = idCliente;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override
