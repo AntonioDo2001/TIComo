@@ -20,3 +20,19 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'SnykPruebas'
+    testType: 'app'
+    monitorWhen: 'always'
+    failOnIssues: true
+    additionalArguments: '--all-projects'
+    
+
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'SnykPruebas'
+    testType: 'container'
+    dockerImageName: 'Pruebas'
+    monitorWhen: 'always'
+    failOnIssues: true
