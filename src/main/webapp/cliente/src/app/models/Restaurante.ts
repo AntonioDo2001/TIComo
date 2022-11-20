@@ -7,6 +7,7 @@ export class Restaurante {
     /*private*/ telefono: String;
     /*private*/ email: String;
     /*private*/ categoria: String;
+	/*private*/ valoracionMedia: number;
     
     
     constructor(Nombre: String, RazonSocial: String, CIF: String,DireccionCompleta: String,Telefono: String, Email: String, Categoria: String){
@@ -17,6 +18,7 @@ export class Restaurante {
         this.telefono = Telefono;
         this.email = Email;
         this.categoria = Categoria;
+		this.valoracionMedia = 0.0;
         
     }
 	get_id(): String | undefined {

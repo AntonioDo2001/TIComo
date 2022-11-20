@@ -9,7 +9,7 @@
                             <input type="text" formControlName="nombre"
                             class="form-control form-control-lg" placeholder="Nombre">
                             <div class="text-danger" 
-                                *ngIf="adminForm.get('nombre')?.hasError('required') && adminForm.get('nombre')?.touched">
+                                *ngIf="adminForm.get('nombre')?.hasError('required') ">
                                 <span>El campo Nombre del administrador <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -17,7 +17,7 @@
                             <input type="text" formControlName="apellidos"
                             class="form-control form-control-lg" placeholder="Apellidos">
                             <div class="text-danger" 
-                                *ngIf="adminForm.get('apellidos')?.hasError('required') && adminForm.get('apellidos')?.touched">
+                                *ngIf="adminForm.get('apellidos')?.hasError('required')">
                                 <span>El campo Apellidos del admin <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -25,7 +25,7 @@
                             <input type="text" formControlName="zona"
                             class="form-control form-control-lg" placeholder="Zona">
                             <div class="text-danger" 
-                                *ngIf="adminForm.get('zona')?.hasError('required') && adminForm.get('zona')?.touched">
+                                *ngIf="adminForm.get('zona')?.hasError('required')">
                                 <span>El campo Zona del admin <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -33,7 +33,7 @@
                             <input type="email" formControlName="email"
                             class="form-control form-control-lg " placeholder="Email">
                             <div class="text-danger" 
-                                *ngIf="adminForm.get('email')?.hasError('required') && adminForm.get('email')?.touched">
+                                *ngIf="adminForm.get('email')?.hasError('required')">
                                 <span>El campo Email del admin <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>
@@ -41,7 +41,7 @@
                             <input type="password" formControlName="password"
                             class="form-control form-control-lg" placeholder="Password">
                             <div class="text-danger" 
-                                *ngIf="adminForm.get('password')?.hasError('required') && adminForm.get('password')?.touched">
+                                *ngIf="adminForm.get('password')?.hasError('required') ">
                                 <span>El campo Password del admin <strong> ES OBLIGATORIO</strong></span>
                             </div>
                           </div>

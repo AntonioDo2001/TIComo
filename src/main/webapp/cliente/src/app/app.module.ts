@@ -15,7 +15,6 @@ import { HelperService } from './models/HelperService';
 import { AppComponent } from './app.component';
 import { CrearRiderComponent } from './components/crear-rider/crear-rider.component';
 import { ListarRidersComponent } from './components/listar-riders/listar-riders.component';
-import { FormularioRegistroComponent } from './components/formulario-registro/formulario-registro.component';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 import { LoginComponent } from './components/login/login.component';
 import { ListarPlatosComponent } from './components/listar-platos/listar-platos.component';
@@ -30,14 +29,30 @@ import { PaginaPrincipalClienteComponent } from './components/pagina-principal-c
 import { ListarPlatosClienteComponent } from './components/listar-platos-cliente/listar-platos-cliente.component';
 import { ListarRestaurantesClienteComponent } from './components/listar-restaurantes-cliente/listar-restaurantes-cliente.component';
 import { RegisterComponent } from './components/register/register.component';
-import { EditarPerfilClienteComponent } from './components/editar-perfil-cliente/editar-perfil-cliente.component'
+import { EditarPerfilClienteComponent } from './components/editar-perfil-cliente/editar-perfil-cliente.component';
+import { PantallaCargaInicialComponent } from './components/pantalla-carga-inicial/pantalla-carga-inicial.component';
+import { ListarPedidosClienteComponent } from './components/listar-pedidos-cliente/listar-pedidos-cliente.component';
+import { ListarPedidosRiderComponent } from './components/listar-pedidos-rider/listar-pedidos-rider.component';
+import { CrearPedidoComponent } from './components/crear-pedido/crear-pedido.component';
+import { PaginaPagoPedidoComponent } from './components/pagina-pago-pedido/pagina-pago-pedido.component';
+import { ValorarRiderComponent } from './components/valorar-rider/valorar-rider.component';
+import { ValorarRestauranteComponent } from './components/valorar-restaurante/valorar-restaurante.component';
+import { ListarPedidosRealizadosClienteComponent } from './components/listar-pedidos-realizados-cliente/listar-pedidos-realizados-cliente.component';
+import { ListarEntregasRiderComponent } from './components/listar-entregas-rider/listar-entregas-rider.component';
+import { ListarEntregasClienteComponent } from './components/listar-entregas-cliente/listar-entregas-cliente.component';
+import { PaginaPrincipalRiderComponent } from './components/pagina-principal-rider/pagina-principal-rider.component';
+import { RealizarValoracionComponent } from './components/realizar-valoracion/realizar-valoracion.component';
+import { VerValoracionesRestauranteComponent } from './components/ver-valoraciones-restaurante/ver-valoraciones-restaurante.component';
+import { VerValoracionesRiderComponent } from './components/ver-valoraciones-rider/ver-valoraciones-rider.component';
+import { VerValoracionesRestauranteAdminComponent } from './components/ver-valoraciones-restaurante-admin/ver-valoraciones-restaurante-admin.component';
+import { VerFacturaComponent } from './components/ver-factura/ver-factura.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CrearRiderComponent,
     ListarRidersComponent,
-    FormularioRegistroComponent,
+
     PaginaPrincipalComponent,
     LoginComponent,
     ListarPlatosComponent,
@@ -52,7 +67,23 @@ import { EditarPerfilClienteComponent } from './components/editar-perfil-cliente
     ListarPlatosClienteComponent,
     ListarRestaurantesClienteComponent,
     RegisterComponent,
-    EditarPerfilClienteComponent
+    EditarPerfilClienteComponent,
+    PantallaCargaInicialComponent,
+    ListarPedidosClienteComponent,
+    ListarPedidosRiderComponent,
+    CrearPedidoComponent,
+    PaginaPagoPedidoComponent,
+    ValorarRiderComponent,
+    ValorarRestauranteComponent,
+    ListarPedidosRealizadosClienteComponent,
+    ListarEntregasRiderComponent,
+    ListarEntregasClienteComponent,
+    PaginaPrincipalRiderComponent,
+    RealizarValoracionComponent,
+    VerValoracionesRestauranteComponent,
+    VerValoracionesRiderComponent,
+    VerValoracionesRestauranteAdminComponent,
+    VerFacturaComponent,
   ],
   imports: [
     BrowserModule,

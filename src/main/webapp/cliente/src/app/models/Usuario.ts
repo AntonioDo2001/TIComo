@@ -4,6 +4,7 @@ export class Usuario {
     /*private*/ apellidos: String;
     /*private*/ email: String;
     /*private*/ password: String;
+	/*private*/ cuentaActiva: boolean;
     
     
     constructor(Nombre: String, Apellidos: String, Email: String, Password: String){
@@ -11,6 +12,7 @@ export class Usuario {
         this.apellidos = Apellidos;
         this.email = Email;
         this.password = Password;
+		this.cuentaActiva = true;
         
     }
 	get_id(): String | undefined {

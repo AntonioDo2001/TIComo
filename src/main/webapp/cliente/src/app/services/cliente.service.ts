@@ -31,5 +31,9 @@ export class ClienteService {
     return this.http.put(this.url + id, cliente);
   }
 
+  activarODesactivarCliente(cliente:Cliente): Observable<any>{
+    return this.http.put(this.url,cliente);
+  }
+
 
 }

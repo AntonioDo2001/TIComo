@@ -1,1 +1,48 @@
-<p>listar-entregas-cliente works!</p>
+<div class="containter mt-5">
+    <div class="row">
+        <div class ="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">ENTREGA DE PEDIDOS</span>
+                    <button class="btn btn-success float-start" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/pagina-principal-cliente">ATRAS</button>
+                    <table *ngIf ="listEntregasCliente.length > 0" class="table table-striped mt-4">
+                        <thead>
+                          <tr>
+                            <th scope="col">Fecha y Hora</th>
+                            <th scope="col">Pedidos de la entrega</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Precio total</th>
+                            <th scope="col">Restaurante</th>
+                            <th scope="col">Marcar como entregado</th>
+                            <th scope="col">Factura</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let entrega of listEntregasCliente">
+                            <td>{{ entrega.fechayhora}}</td>
+                            <td>{{ entrega.pedidosRealizados }}</td>
+                            <td>{{ entrega.estado }}</td>
+                            <td>{{ entrega.precioTotal }}</td>
+                            <td>{{ entrega.nombreRestaurante }}</td>
+                            <td>  
+                              <i *ngIf ="entrega.estado == 'reparto' " [routerLink]="['/realizar-valoracion', entrega.id]" (click)="comprobarEntrega(entrega.estado)"  class="fa-solid fa-check"></i>
+                              
+                            </td>
+                            <td>
+                              <i [routerLink]="['/ver-factura', entrega.id]" class="fa-solid fa-file-invoice"></i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr>
+                      <h5 style=" margin-top: 10px;" *ngIf ="listEntregasCliente.length == 0">NO HAY ENTREGAS</h5>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+    
+</div>

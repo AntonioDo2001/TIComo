@@ -1,1 +1,41 @@
-<p>listar-entregas-rider works!</p>
+<div class="containter mt-5">
+    <div class="row">
+        <div class ="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">ENTREGA DE PEDIDOS</span>
+                    <button class="btn btn-success float-start" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/pagina-principal-rider">ATRAS</button>
+                    <table *ngIf ="listEntregasSinAsignar.length > 0" class="table table-striped mt-4">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre Cliente</th>
+                            <th scope="col">Apellidos Cliente</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let entrega of listEntregasSinAsignar">
+                            <td>{{ entrega.nombreCliente}}</td>
+                            <td>{{ entrega.apellidosCliente }}</td>
+                            <td>{{ entrega.direccion }}</td>
+                            <td>{{ entrega.telefonoCliente }}</td>
+                            <td>
+                                <i (click)="asignarEntregaRider(entrega.id)" class="fa-solid fa-truck"></i>                            
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr>
+                      <h5 style=" margin-top: 10px;" *ngIf ="listEntregasSinAsignar.length == 0">NO HAY ENTREGAS</h5>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+    
+</div>

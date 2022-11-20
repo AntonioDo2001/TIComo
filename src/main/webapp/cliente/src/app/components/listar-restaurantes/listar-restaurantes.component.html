@@ -16,7 +16,9 @@
                             <th scope="col">Telefono</th>
                             <th scope="col">Email</th>
                             <th scope="col">Categoria</th>
-                            <th scope="col"></th>
+                            <th scope="col">Editar/Eliminar</th>
+                            <th scope="col">Nuevo Plato</th>
+                            <th scope="col">Valoraciones</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -30,10 +32,13 @@
                             <td>{{ restaurante.categoria }}</td>
                             <td>
                                 <i [routerLink]="['/editar-restaurante', restaurante.id]" class="fa-solid fa-pen-to-square text-primary"></i>
-                                <i (click)="eliminarRestaurante(restaurante.id)" class="fa-solid fa-trash text-danger"></i>
-                                <i (click)="enviaridRestaurantePlato(restaurante.id)" [routerLink]="['/crear-plato']"  class="fa-solid fa-bowl-food text-primary"></i>
-                              
-                                
+                                <i (click)="eliminarRestaurante(restaurante.id)" class="fa-solid fa-trash text-danger"></i>                                
+                            </td>
+                            <td>
+                              <i (click)="enviarnombreRestaurante(restaurante.nombre)" [routerLink]="['/crear-plato']"  class="fa-solid fa-bowl-food text-primary"></i>
+                            </td>
+                            <td>
+                              <i [routerLink]="['/ver-valoraciones-restaurante-admin', restaurante.nombre]" class="fa-solid fa-message"></i>
                             </td>
                           </tr>
                         </tbody>

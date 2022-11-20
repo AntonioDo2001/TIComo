@@ -7,11 +7,11 @@
                     <form class="mt-3"  [formGroup]="pedidoForm" (ngSubmit)="agregarPedido()">
                         <div class="mb-3">                           
                             <input type="text" formControlName="nombrePlato"
-                            class="form-control form-control-lg" placeholder="Nombre">
+                            class="form-control form-control-lg" placeholder="Nombre" readonly=">>readonly>>">
                           </div>
                           <div class="mb-3">                           
                             <input type ="number" formControlName= "precioPlato"
-                            class="form-control form-control-lg" placeholder="PrecioPlato">
+                            class="form-control form-control-lg" placeholder="PrecioPlato" readonly=">>readonly>>">
                           </div>
                           <div class="mb-3">                           
                             <input type="number" formControlName="cantidadPlato"

@@ -20,7 +20,7 @@ export class ListarClientesComponent implements OnInit {
 
   obtenerClientes(){
     this._clienteService.getClientes().subscribe(data =>{
-      console.log(data);
+  
       this.listClientes = data;
     }, error => {
       console.log(error);
@@ -36,6 +36,37 @@ export class ListarClientesComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+  activarCliente(cliente:Cliente){
+    if(cliente.cuentaActiva == true){
+      this.toastr.error('La cuenta del cliente ya estaba activa', 'CLIENTE YA ACTIVO');
+    }
+    else{
+      cliente.cuentaActiva = true;
+      this._clienteService.activarODesactivarCliente(cliente).subscribe(data =>{
+        this.toastr.info('La cuenta del cliente ha sido activada', 'CLIENTE ACTIVADO');
+      }, error=>{
+        console.log(error);
+        this.toastr.error('Error al activar cuenta del cliente', 'ERROR ACTIVACION');
+      })
+    }
+    
+  }
+  desactivarCliente(cliente:Cliente){
+    if(cliente.cuentaActiva == false){
+      this.toastr.error('La cuenta del cliente ya estaba desactivada', 'CLIENTE YA DESACTIVADO');
+    }
+    else{
+      cliente.cuentaActiva = false;
+      this._clienteService.activarODesactivarCliente(cliente).subscribe(data =>{
+        this.toastr.info('La cuenta del cliente ha sido desactivada', 'CLIENTE DESACTIVADO');
+      }, error=>{
+        console.log(error);
+        this.toastr.error('Error al desactivar cuenta del cliente', 'ERROR DESACTIVACION');
+      })
+    }
+    
   }
 
 }
