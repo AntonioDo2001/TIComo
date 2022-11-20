@@ -83,7 +83,6 @@ export class CrearAdminComponent implements OnInit {
         })
       } else{
         //agregamos Admin
-        console.log(ADMIN);
         this._adminService.guardarAdmin(ADMIN).subscribe(data => {
           var jsonRespuesta : JSON = data;
           var respuesta : string = JSON.stringify(jsonRespuesta);

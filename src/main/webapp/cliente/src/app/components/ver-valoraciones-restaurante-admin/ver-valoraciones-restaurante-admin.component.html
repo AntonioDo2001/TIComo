@@ -1,0 +1,30 @@
+<div class="containter mt-5">
+    <div class="row">
+        <div class ="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">VALORACIONES RESTAURANTES</span>
+                    <button class="btn btn-success float-start" style=" border-color: white; color: white ;background-color:#e8882a; font-size: 30px;" routerLink="/listar-restaurantes">ATRAS</button>
+                    <table *ngIf ="listValoracionesRestaurantes.length > 0" class="table table-striped mt-4">
+                        <thead>
+                          <tr>
+                            <th scope="col">Valoracion</th>
+                            <th scope="col">Comentario</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let valoracion of listValoracionesRestaurantes">
+                            <td>{{ valoracion.valoracion }}</td>
+                            <td>{{ valoracion.comentario }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr>
+                      <h1 *ngIf ="listValoracionesRestaurantes.length > 0">Valoración media:</h1>
+                      <h1 *ngIf ="listValoracionesRestaurantes.length > 0">{{mediaValoraciones}}</h1>
+                      <hr>
+                      <h5 style=" margin-top: 10px;" *ngIf ="listValoracionesRestaurantes.length == 0">NO HAY VALORACIONES DE RESTAURANTES GUARDADAS</h5>
+                </div>
+            </div>
+        </div>
+    </div>

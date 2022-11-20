@@ -1,0 +1,43 @@
+<div class="containter mt-5">
+    <div class="row">
+        <div class ="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">REALIZAR VALORACION</span>
+                    <form class="mt-3"  [formGroup]="valoracionForm" (ngSubmit)="agregarValoracion()">
+
+                        <div class="mb-3">                           
+                            <input type="number" formControlName="valoracionRider"
+                            class="form-control form-control-lg" placeholder="valoracionRider" value=0>
+                            <div class="text-danger" 
+                                *ngIf="valoracionForm.get('valoracionRider')?.hasError('required')">
+                                <span>La valoracion del rider <strong> ES OBLIGATORIA</strong></span>
+                            </div>
+                          </div>
+                          <div class="mb-3">                           
+                            <input type ="text" formControlName= "comentarioRider"
+                            class="form-control form-control-lg" placeholder="ComentarioValoracion">
+                          </div>
+                          
+                          <div class="mb-3">                           
+                            <input type="number" formControlName="valoracionRestaurante"
+                            class="form-control form-control-lg" placeholder="valoracionRestaurante" value=0>
+                            <div class="text-danger" 
+                                *ngIf="valoracionForm.get('valoracionRestaurante')?.hasError('required')">
+                                <span>La valoracion del restaurante <strong> ES OBLIGATORIA</strong></span>
+                            </div>
+                          </div>
+                          <div class="mb-3">                           
+                            <input type ="text" formControlName= "comentarioRestaurante"
+                            class="form-control form-control-lg" placeholder="ComentarioRestaurante">
+                          </div>
+                          <button type="submit" class="btn btn-success btn-lg float-end" style=" border-color: white; color: white ;background-color:#e8882a;">GUARDAR</button>
+                          <button routerLink ="/listar-entregas-cliente" class="btn btn-secondary btn-lg float-start">ATRÁS</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

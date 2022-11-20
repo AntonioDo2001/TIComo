@@ -37,7 +37,6 @@ export class CrearRiderComponent implements OnInit {
   agregarRider(){
     let camposRellenos = false;
    
-    /*console.log(this.riderForm.get('Nombre')?.value);*/
     if(this.riderForm.get('nombre')?.value == ""){
       this.toastr.error('Debes introducir un nombre', 'CAMPO NOMBRE SIN RELLENAR');
     }
@@ -93,7 +92,7 @@ export class CrearRiderComponent implements OnInit {
         })
       } else{
         //agregamos Rider
-        console.log(RIDER);
+
         this._riderService.guardarRider(RIDER).subscribe(data => {
           var jsonRespuesta : JSON = data;
           var respuesta : string = JSON.stringify(jsonRespuesta);

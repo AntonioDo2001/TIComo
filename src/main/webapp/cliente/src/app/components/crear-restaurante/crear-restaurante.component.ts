@@ -36,6 +36,7 @@ export class CrearRestauranteComponent implements OnInit {
   }
   agregarRestaurante(){
     var camposRellenos: boolean = false;
+    
     if(this.restauranteForm.get('nombre')?.value == ""){
       this.toastr.error('Debes introducir un nombre', 'CAMPO NOMBRE SIN RELLENAR');
     }
@@ -69,8 +70,19 @@ export class CrearRestauranteComponent implements OnInit {
       //editamos Restaurante
       if(camposRellenos){
         this._restauranteService.editarRestaurante(this.id,RESTAURANTE).subscribe(data => {
-          this.toastr.info('El Restaurante ha sido modificado correctamente!', 'RESTAURANTE MODIFICADO');
-          this.router.navigate(['/listar-restaurantes']);
+          var jsonRespuesta : JSON = data;
+          var respuesta : string = JSON.stringify(jsonRespuesta);
+          if(respuesta.includes("tlfFormErr")){
+            this.toastr.error('El formato del telefono es incorrecto. Debe ser un número de 9 dígitos', 'FORMATO DE TELEFONO INVÁLIDO');
+           }
+           else if(respuesta.includes("emailFormato")){
+            this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
+          else{
+            this.toastr.info('El Restaurante ha sido modificado correctamente!', 'RESTAURANTE MODIFICADO');
+            this.router.navigate(['/listar-restaurantes']);
+          }
+          
   
         }, error => {
           console.log(error);
@@ -88,8 +100,19 @@ export class CrearRestauranteComponent implements OnInit {
          //agregamos Restaurante
       console.log(RESTAURANTE);
       this._restauranteService.guardarRestaurante(RESTAURANTE).subscribe(data => {
-      this.toastr.success('El Restaurante introducido se ha guardado correctamente!', 'RESTAURANTE GUARDADO');
-      this.router.navigate(['/listar-restaurantes']);
+        var jsonRespuesta : JSON = data;
+        var respuesta : string = JSON.stringify(jsonRespuesta);
+        if(respuesta.includes("tlfFormErr")){
+          this.toastr.error('El formato del telefono es incorrecto. Debe ser un número de 9 dígitos', 'FORMATO DE TELEFONO INVÁLIDO');
+         }
+         else if(respuesta.includes("emailFormato")){
+          this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+         }
+        else{
+          this.toastr.success('El Restaurante introducido se ha guardado correctamente!', 'RESTAURANTE GUARDADO');
+          this.router.navigate(['/listar-restaurantes']);
+        }
+      
       }, error => {
         console.log(error);
         this.restauranteForm.reset();

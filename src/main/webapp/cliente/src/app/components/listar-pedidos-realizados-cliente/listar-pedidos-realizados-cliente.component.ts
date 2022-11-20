@@ -22,19 +22,16 @@ export class ListarPedidosRealizadosClienteComponent implements OnInit {
   ngOnInit(): void {
     this.idCliente = this.aRouter.snapshot.paramMap.get('idCliente')!;
     this.helper.customMessage.subscribe(msg => this.idCliente = msg);
-    console.log(this.idCliente);
     this.obtenerPedidos();
     
     this.helper.changeMessage(this.idCliente);
     this.helper.customMessage.subscribe(msg => this.idCliente = msg);
   }
   obtenerPedidos(){
-    console.log("El id es")
-    console.log(this.idCliente)
+
     this._pedidoService.obtenerPedidosCliente(this.idCliente).subscribe(data =>{
       
       this.listPedidos = data;
-      console.log(this.listPedidos);
       for(let i = 0 ; i < this.listPedidos.length ; i++){
         if(this.listPedidos[i].pedidoRealizado == true){
           this.listPedidosRealizados.push(this.listPedidos[i]);

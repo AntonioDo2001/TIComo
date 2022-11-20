@@ -36,7 +36,6 @@ export class CrearPlatoComponent implements OnInit {
 
   ngOnInit(): void {
     this.helper.customMessage.subscribe(msg => this.nombreRestaurante = msg);
-    console.log(this.nombreRestaurante);
     this.platosForm.setValue({
       nombre: "",
       foto: "",
@@ -72,9 +71,6 @@ export class CrearPlatoComponent implements OnInit {
     this.platosForm.get('aptoVeganos')?.value, this.platosForm.get('nombreRestaurante')?.value)
 
     if(this.id !==null){
-      console.log("Estamos en editar");
-      console.log(this.platosForm.get('aptoVeganos')?.value)
-      console.log(this.platosForm.get('nombre')?.value)
       //editamos Plato
       if(camposRellenos){
         this._platoService.editarPlato(this.id,PLATO).subscribe(data => {

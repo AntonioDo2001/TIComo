@@ -13,6 +13,7 @@
                             <th scope="col">PrecioPlato</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">PrecioTotal</th>
+                            <th scope="col">Nombre Restaurante</th>
                             <th scope="col"></th>
                           </tr>
                         </thead>
@@ -22,6 +23,8 @@
                             <td>{{ pedido.precioPlato }}</td>
                             <td>{{ pedido.cantidadPlato }}</td>
                             <td>{{ pedido.precioTotal }}</td>
+                            <td>{{ pedido.nombreRestaurante }}</td>
+                            <i (click)="eliminarPedido(pedido.id)" class="fa-solid fa-trash text-danger"></i>
                             <td>                                
                             </td>
                           </tr>
