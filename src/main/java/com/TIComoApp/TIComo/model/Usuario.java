@@ -25,6 +25,8 @@ public class Usuario {
 	private String email;
 	@NonNull
 	private String password;
+	@NonNull
+	private boolean cuentaActiva;
 
 
 
@@ -35,6 +37,7 @@ public class Usuario {
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
+		this.cuentaActiva = true;
 
 	}
 
@@ -106,6 +109,12 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+    public boolean isCuentaActiva() {
+		return cuentaActiva;
+	}
+    public void setCuentaActiva(boolean cuentaActiva) {
+		this.cuentaActiva = cuentaActiva;
 	}
 
 

@@ -16,6 +16,8 @@ public class Rider extends Usuario{
 	private String tipoVehiculo;
 	private String matricula;
 	private String carnet;
+	@NonNull
+	private double valoracionMedia;
 	public Rider(String id, String nombre, String apellidos, String email, String password, String NIF,
 			String tipoVehiculo, String matricula, String carnet) {
 		super(id, nombre, apellidos, email, password);
@@ -23,6 +25,7 @@ public class Rider extends Usuario{
 		this.tipoVehiculo = tipoVehiculo;
 		this.matricula = matricula;
 		this.carnet = carnet;
+		this.valoracionMedia = 0.0;
 	}
 	public String getNIF() {
 		return NIF;
@@ -47,6 +50,12 @@ public class Rider extends Usuario{
 	}
 	public void setCarnet(String carnet) {
 		this.carnet = carnet;
+	}
+	public double getValoracionMedia() {
+		return valoracionMedia;
+	}
+	public void setValoracionMedia(double valoracionMedia) {
+		this.valoracionMedia = valoracionMedia;
 	}
 	@Override
 	public String toString() {

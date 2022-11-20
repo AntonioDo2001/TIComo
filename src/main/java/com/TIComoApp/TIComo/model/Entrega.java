@@ -3,6 +3,10 @@ package com.TIComoApp.TIComo.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.mongodb.lang.NonNull;
 
 import lombok.Data;
@@ -25,11 +29,19 @@ public class Entrega {
 	@NonNull
 	private String telefonoCliente;
 	@NonNull
+	private String fechayhora;
+	@NonNull
+	private String pedidosRealizados;
+	@NonNull
 	private String estado;
 	@NonNull
 	private boolean entregado;
+	@NonNull
+	private double precioTotal;
+	@NonNull
+	private String nombreRestaurante;
 	
-	public Entrega(String id, String idCliente,String nombreCliente, String apellidosCliente, String direccion, String telefonoCliente) {
+	public Entrega(String id, String idCliente,String nombreCliente, String apellidosCliente, String direccion, String telefonoCliente, String pedidosRealizados, double precioTotal, String nombreRestaurante) {
 		super();
 		this.id = id;
 		this.idRider = "";
@@ -38,8 +50,13 @@ public class Entrega {
 		this.apellidosCliente = apellidosCliente;
 		this.direccion = direccion;
 		this.telefonoCliente = telefonoCliente;
+		this.pedidosRealizados = pedidosRealizados;
 		this.estado = "listo";
 		this.entregado = false;
+		this.precioTotal = precioTotal;
+		this.nombreRestaurante = nombreRestaurante;
+		DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm:ss z");
+		this.fechayhora = dateFormat.format(new Date());
 	}
 
 	public String getId() {
@@ -101,7 +118,37 @@ public class Entrega {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public String getFechayhora() {
+		return fechayhora;
+	}
 
+	public String getPedidosRealizados() {
+		return pedidosRealizados;
+	}
+	public void setPedidosRealizados(String pedidosRealizados) {
+		this.pedidosRealizados = pedidosRealizados;
+	}
+	public String getTelefonoCliente() {
+		return telefonoCliente;
+	}
+	public double getPrecioTotal() {
+		return precioTotal;
+	}
+	public void setFechayhora(String fechayhora) {
+		this.fechayhora = fechayhora;
+	}
+	public void setPrecioTotal(double precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+	public void setTelefonoCliente(String telefonoCliente) {
+		this.telefonoCliente = telefonoCliente;
+	}
+	public String getNombreRestaurante() {
+		return nombreRestaurante;
+	}
+	public void setNombreRestaurante(String nombreRestaurante) {
+		this.nombreRestaurante = nombreRestaurante;
+	}
 	@Override
 	public String toString() {
 		return "Entrega [id=" + id + ", idRider=" + idRider + ", nombreCliente=" + nombreCliente + ", apellidosCliente="
