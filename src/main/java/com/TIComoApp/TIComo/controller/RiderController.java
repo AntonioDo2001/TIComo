@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.TIComoApp.TIComo.model.Cliente;
 import com.TIComoApp.TIComo.model.Rider;
 import com.TIComoApp.TIComo.repository.RiderRepository;
 
@@ -81,6 +82,7 @@ public class RiderController {
 			riderFromDB.setCarnet(rider.getCarnet());
 			riderFromDB.setEmail(rider.getEmail());
 			riderFromDB.setPassword(rider.getPassword());
+			riderFromDB.setValoracionMedia(rider.getValoracionMedia());
 			
 			if(!rider.comprobarMatricula(rider.getMatricula())) {
 				return new Rider(ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR,ERRMATR);
@@ -98,6 +100,17 @@ public class RiderController {
 		
 		
 	}
+	
+	
+	@PutMapping("")
+	Rider desactivarActivarRider(@RequestBody Rider rider) {
+		Rider riderFromDB = riderRepository.findById(rider.getId()).orElseThrow(RuntimeException::new);
+		riderFromDB.setCuentaActiva(rider.isCuentaActiva());
+		return riderRepository.save(riderFromDB);
+	}
+	
+	
+	
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")

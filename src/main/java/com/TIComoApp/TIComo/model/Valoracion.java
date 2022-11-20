@@ -13,21 +13,25 @@ public class Valoracion {
 	@Id
 	private String id;
 	@NonNull
-	private String esRiderORestaurante;
+	private String idEntrega;
 	@NonNull
-	private String nombre;
+	private String esRiderORestaurante;
 	@NonNull
 	private int valoracion;
 	@NonNull
 	private String comentario;
+	@NonNull
+	private String idRiderOnombreRestaurante;
+
 	
-	public Valoracion(String id, String esRiderORestaurante, String nombre, int valoracion, String comentario) {
+	
+	public Valoracion(String id, String esRiderORestaurante, int valoracion, String comentario,String idRiderOnombreRestaurante) {
 		super();
 		this.id = id;
 		this.esRiderORestaurante = esRiderORestaurante;
-		this.nombre = nombre;
 		this.valoracion = valoracion;
 		this.comentario = comentario;
+		this.idRiderOnombreRestaurante = idRiderOnombreRestaurante;
 	}
 
 	public String getId() {
@@ -46,13 +50,6 @@ public class Valoracion {
 		this.esRiderORestaurante = esRiderORestaurante;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public int getValoracion() {
 		return valoracion;
@@ -69,11 +66,22 @@ public class Valoracion {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
+	public String getIdRiderOnombreRestaurante() {
+		return idRiderOnombreRestaurante;
+	}
+	public void setIdRiderOnombreRestaurante(String idRiderOnombreRestaurante) {
+		this.idRiderOnombreRestaurante = idRiderOnombreRestaurante;
+	}
+	public String getIdEntrega() {
+		return idEntrega;
+	}
+	public void setIdEntrega(String idEntrega) {
+		this.idEntrega = idEntrega;
+	}
 
 	@Override
 	public String toString() {
-		return "Valoracion [id=" + id + ", esRiderORestaurante=" + esRiderORestaurante + ", nombre=" + nombre
-				+ ", valoracion=" + valoracion + ", comentario=" + comentario + "]";
+		return "Valoracion [id=" + id + ", esRiderORestaurante=" + esRiderORestaurante + ", valoracion=" + valoracion + ", comentario=" + comentario + "]";
 	}
 	
 

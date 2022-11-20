@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.TIComoApp.TIComo.model.Entrega;
 import com.TIComoApp.TIComo.model.Pedido;
+import com.TIComoApp.TIComo.model.Plato;
 import com.TIComoApp.TIComo.repository.EntregaRepository;
 
 @CrossOrigin
@@ -40,11 +41,11 @@ public class EntregaController {
 	
 	
 	@GetMapping("/{id}")
-	List<Entrega> obtenerEntregasCliente(@PathVariable String idCliente) {
+	List<Entrega> obtenerEntregasCliente(@PathVariable String id) {
 		List<Entrega> entregas = entregaRepository.findAll();
 		List<Entrega> entregasCliente = new ArrayList<Entrega>();		
 		for(int i=0;i<entregas.size();i++) {
-			if(entregas.get(i).getIdCliente().equals(idCliente)) {
+			if(entregas.get(i).getIdCliente().equals(id)) {
 				entregasCliente.add(entregas.get(i));
 			}
 		}
@@ -61,13 +62,26 @@ public class EntregaController {
 	
 	
 	@PutMapping("/{id}")
-	Entrega asignarRider(@PathVariable String id, String idRider) {
+	Entrega asignarRider(@PathVariable String id, @RequestBody String idRider) {
 		Entrega entregaFromDB = entregaRepository.findById(id).orElseThrow(RuntimeException::new);
 		entregaFromDB.setIdRider(idRider);
+		entregaFromDB.setEstado("reparto");
 		
 		return entregaRepository.save(entregaFromDB);
 		
 	}
+	
+	
+	@PutMapping("")
+	Entrega marcarEntregado(@RequestBody Entrega entrega) {
+		Entrega entregaFromDB = entregaRepository.findById(entrega.getId()).orElseThrow(RuntimeException::new);
+		entregaFromDB.setEntregado(true);
+		entregaFromDB.setIdRider("");
+		entregaFromDB.setEstado("entregado");
+		return entregaRepository.save(entregaFromDB);
+		
+	}
+	
 	
 		
 	@ResponseStatus(HttpStatus.NO_CONTENT)

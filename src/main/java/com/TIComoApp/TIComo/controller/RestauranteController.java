@@ -76,6 +76,7 @@ public class RestauranteController {
 			restauranteFromDB.setTelefono(restaurante.getTelefono());
 			restauranteFromDB.setEmail(restaurante.getEmail());
 			restauranteFromDB.setCategoria(restaurante.getCategoria());
+			restauranteFromDB.setValoracionMedia(restaurante.getValoracionMedia());
 			
 			
 			return restauranteRepository.save(restauranteFromDB);

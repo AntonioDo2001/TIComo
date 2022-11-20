@@ -126,7 +126,7 @@ public class AuthenticationController {
 		}
 		else if(esRiderLogin) {
 			if(BCrypt.checkpw(password, riderEncontrado.getPassword())) {
-				return new JsonObject("{\"respuesta\":\"riderLogin\"}");
+				return new JsonObject("{\"respuesta\":\"riderLogin\",\"idRider\":\""+riderEncontrado.getId()+"\"}");
 			}
 			else {
 				return new JsonObject("{\"respuesta\":\"Email o Password incorrecto\"}");
