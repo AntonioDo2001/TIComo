@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.TIComoApp.TIComo.model.Cliente;
+import com.TIComoApp.TIComo.model.Entrega;
 import com.TIComoApp.TIComo.model.Pedido;
 import com.TIComoApp.TIComo.repository.PedidoRepository;
 
@@ -56,9 +57,10 @@ public class PedidoController {
 	}
 	
 	@PutMapping("/{id}")
-	Pedido pedidoRealizado(@PathVariable String id,@RequestBody Pedido pedido) {
+	Pedido pedidoRealizado(@PathVariable String id,@RequestBody Entrega entrega) {
 			Pedido pedidoFromDB = pedidoRepository.findById(id).orElseThrow(RuntimeException::new);		
-			pedidoFromDB.setPedidoRealizado(true);		
+			pedidoFromDB.setPedidoRealizado(true);	
+			pedidoFromDB.setIdEntrega(entrega.getId());
 			return pedidoRepository.save(pedidoFromDB);
 	}
 	

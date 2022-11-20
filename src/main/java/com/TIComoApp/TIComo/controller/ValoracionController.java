@@ -28,6 +28,7 @@ public class ValoracionController {
 	
 	@Autowired
 	private ValoracionRepository valoracionRepository;
+	
 		
 	
 	
@@ -41,6 +42,7 @@ public class ValoracionController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
 	Valoracion create(@RequestBody Valoracion valoracion) {
+		
 		return valoracionRepository.save(valoracion);
 		
 	}

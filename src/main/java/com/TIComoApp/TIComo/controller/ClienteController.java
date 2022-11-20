@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.TIComoApp.TIComo.model.Cliente;
+import com.TIComoApp.TIComo.model.Rider;
 import com.TIComoApp.TIComo.repository.ClienteRepository;
 
 @CrossOrigin
@@ -124,6 +125,12 @@ public class ClienteController {
 		}
 		
 		
+	}
+	@PutMapping("")
+	Cliente desactivarActivarRider(@RequestBody Cliente cliente) {
+		Cliente clienteFromDB = clienteRepository.findById(cliente.getId()).orElseThrow(RuntimeException::new);
+		clienteFromDB.setCuentaActiva(cliente.isCuentaActiva());
+		return clienteRepository.save(clienteFromDB);
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)

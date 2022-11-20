@@ -30,6 +30,9 @@ public class Restaurante {
 	private String email;
 	@NonNull
 	private String categoria;
+	@NonNull
+	private double valoracionMedia;
+	
 	
 	public Restaurante(String id, String nombre, String razonSocial, String CIF, String direccionCompleta,
 			String telefono, String email, String categoria) {
@@ -41,6 +44,7 @@ public class Restaurante {
 		this.telefono = telefono;
 		this.email = email;
 		this.categoria = categoria;
+		this.valoracionMedia = 0.0;
 	}
 
 	public String getId() {
@@ -105,6 +109,12 @@ public class Restaurante {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	public double getValoracionMedia() {
+		return valoracionMedia;
+	}
+	public void setValoracionMedia(double valoracionMedia) {
+		this.valoracionMedia = valoracionMedia;
 	}
 
 	@Override

@@ -25,8 +25,13 @@ public class Pedido {
 	private boolean pedidoRealizado;
 	@NonNull
 	private String idCliente;
+	@NonNull
+	private String idEntrega;
+	@NonNull
+	private String nombreRestaurante;
 	
-	public Pedido(String id, String nombrePlato, int precioPlato, int cantidadPlato, String idCliente) {
+	
+	public Pedido(String id, String nombrePlato, int precioPlato, int cantidadPlato, String idCliente, String nombreRestaurante) {
 		super();
 		this.id = id;
 		this.nombrePlato = nombrePlato;
@@ -35,6 +40,8 @@ public class Pedido {
 		this.precioTotal = calcularPrecioTotal();
 		this.pedidoRealizado = false;
 		this.idCliente = idCliente;
+		this.idEntrega = "";
+		this.nombreRestaurante = nombreRestaurante;
 	}
 
 	public String getId() {
@@ -93,6 +100,18 @@ public class Pedido {
 		this.idCliente = idCliente;
 	}
 
+	public void setIdEntrega(String idEntrega) {
+		this.idEntrega = idEntrega;
+	}
+	public String getIdEntrega() {
+		return idEntrega;
+	}
+	public String getNombreRestaurante() {
+		return nombreRestaurante;
+	}
+	public void setNombreRestaurante(String nombreRestaurante) {
+		this.nombreRestaurante = nombreRestaurante;
+	}
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", nombrePlato=" + nombrePlato + ", precioPlato=" + precioPlato + ", cantidadPlato="
