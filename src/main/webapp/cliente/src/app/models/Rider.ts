@@ -5,6 +5,8 @@ export class Rider extends Usuario{
     /*private*/ tipoVehiculo: String;
     /*private*/ matricula: String;
     /*private*/ carnet: String;
+	/*private*/ valoracionMedia: number;
+
 
     
     
@@ -14,6 +16,7 @@ export class Rider extends Usuario{
         this.tipoVehiculo = TipoVehiculo;
         this.matricula = Matricula;
         this.carnet = Carnet;
+		this.valoracionMedia = 0.0;
         
     }
 	getNIF(): String {

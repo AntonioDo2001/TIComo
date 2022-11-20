@@ -3,18 +3,23 @@ export class Pedido {
     /*private*/ nombrePlato :String;
     /*private*/ precioPlato: Number;
     /*private*/ cantidadPlato: Number;
-    /*private*/ precioTotal: Number;
+    /*private*/ precioTotal: number;
     /*private*/ pedidoRealizado: boolean;
     /*private*/ idCliente: String;
+	/*private*/ idEntrega: String;
+	/*private*/ nombreRestaurante: String
     
     
-    constructor(NombrePlato: String, precioPlato: number, cantidadPlato: number, idCliente:String){
+    constructor(NombrePlato: String, precioPlato: number, cantidadPlato: number, idCliente:String,nombreRestaurante: String){
         this.nombrePlato = NombrePlato;
         this.precioPlato = precioPlato;
         this.cantidadPlato = cantidadPlato;
         this.precioTotal = precioPlato * cantidadPlato;
         this.pedidoRealizado = false;
 		this.idCliente= idCliente;
+		this.idEntrega = "";
+		this.nombreRestaurante = nombreRestaurante;
+		
         
     }
 	get_id(): String | undefined {
@@ -31,7 +36,7 @@ export class Pedido {
 	getCantidadPlato(): Number {
 		return this.cantidadPlato;
 	}
-	getPrecioTotal(): Number {
+	getPrecioTotal(): number {
 		return this.precioTotal;
 	}
 	getPedidoRealizado(): boolean {
@@ -39,6 +44,9 @@ export class Pedido {
 	}
 	getidCliente(): String {
 		return this.idCliente;
+	}
+	getidEntrega(): String {
+		return this.idEntrega;
 	}
 
     pedidorealizado() : void{
