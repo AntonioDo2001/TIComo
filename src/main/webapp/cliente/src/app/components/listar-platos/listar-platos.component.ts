@@ -19,7 +19,6 @@ export class ListarPlatosComponent implements OnInit {
   }
   obtenerPlatos(){
     this._platoService.getPlatos().subscribe(data =>{
-      console.log(data);
       this.listPlatos = data;
     }, error => {
       console.log(error);
@@ -35,6 +34,14 @@ export class ListarPlatosComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+  aptoVeganosSioNo(apto : boolean) : String{
+    if(apto){
+      return "Si";
+    }else{
+      return "No";
+    }
   }
 
 }

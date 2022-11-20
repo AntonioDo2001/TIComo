@@ -29,7 +29,6 @@ export class CrearClienteComponent implements OnInit {
 
     })
     this.id = this.aRouter.snapshot.paramMap.get('id')!;
-    console.log(this.id);
   }
 
   ngOnInit(): void {
@@ -80,6 +79,9 @@ export class CrearClienteComponent implements OnInit {
           else if(respuesta.includes("emailFormato")){
             this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
            }
+           else if(respuesta.includes("tlfFormErr")){
+            this.toastr.error('El formato del telefono es incorrecto. Debe ser un número de 9 dígitos', 'FORMATO DE TELEFONO INVÁLIDO');
+           }
           else{
             this.toastr.info('El Cliente ha sido modificado correctamente!', 'CLIENTE MODIFICADO');
             this.router.navigate(['/listar-clientes']);
@@ -100,6 +102,9 @@ export class CrearClienteComponent implements OnInit {
           }
           else if(respuesta.includes("emailFormato")){
             this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+           }
+           else if(respuesta.includes("tlfFormErr")){
+            this.toastr.error('El formato del telefono es incorrecto. Debe ser un número de 9 dígitos', 'FORMATO DE TELEFONO INVÁLIDO');
            }
           else{
             this.toastr.success('El Cliente introducido se ha guardado correctamente!', 'CLIENTE GUARDADO');

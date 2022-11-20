@@ -22,7 +22,6 @@ export class ListarAdminsComponent implements OnInit {
 
   obtenerAdmins(){
     this._adminService.getAdmins().subscribe(data =>{
-      console.log(data);
       this.listAdmins = data;
     }, error => {
       console.log(error);

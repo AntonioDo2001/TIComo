@@ -16,6 +16,8 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class ListarPedidosClienteComponent implements OnInit {
   idCliente = "";
+  nombreRestaurante:String = "";
+  idEntrega : String|undefined = "";
   listPedidos: Pedido[] = [];
   listPedidosSinRealizar: Pedido[] = [];
   cliente: Cliente = new Cliente("","","","","","","")
@@ -26,17 +28,13 @@ export class ListarPedidosClienteComponent implements OnInit {
   ngOnInit(): void {
     this.idCliente = this.aRouter.snapshot.paramMap.get('idCliente')!;
     this.helper.customMessage.subscribe(msg => this.idCliente = msg);
-    console.log(this.idCliente);
     this.obtenerPedidos();
     
     this.helper.changeMessage(this.idCliente);
     this.helper.customMessage.subscribe(msg => this.idCliente = msg);
   }
   obtenerPedidos(){
-    console.log("El id es")
-    console.log(this.idCliente)
     this._pedidoService.obtenerPedidosCliente(this.idCliente).subscribe(data =>{
-      console.log(data);
       this.listPedidos = data;
       for(let i = 0 ; i < this.listPedidos.length ; i++){
         if(this.listPedidos[i].pedidoRealizado == false){
@@ -55,29 +53,57 @@ export class ListarPedidosClienteComponent implements OnInit {
   pagarPedidos(){
 
     this._clienteService.obtenerCliente(this.idCliente).subscribe(data =>{
-      console.log(data);
+    var pedidosRealizados = "";
+    var precioTotal = 0;
+    for(let i=0;i<this.listPedidosSinRealizar.length; i++){
+      pedidosRealizados = pedidosRealizados + this.listPedidosSinRealizar[i].nombrePlato + " -> Cantidad: " + this.listPedidosSinRealizar[i].cantidadPlato + " Precio plato: " 
+      +this.listPedidosSinRealizar[i].precioPlato + " | ";
+      precioTotal = precioTotal + this.listPedidosSinRealizar[i].precioTotal;
+    }
+    if(this.listPedidosSinRealizar.length == 0){
+      this.toastr.error('No tiene ningún pedido que pueda pagar', 'ERROR AL PAGAR');
+    }
+    else{
+      this.nombreRestaurante = this.listPedidosSinRealizar[0].nombreRestaurante;
+      var ENTREGA = new Entrega(data.id,data.nombre,data.apellidos,data.direccionCompleta,data.telefono,pedidosRealizados,precioTotal,this.nombreRestaurante)
+    this._entregaService.guardarEntrega(ENTREGA).subscribe(data => {
+      this.idEntrega = data.id;
+      
+      ENTREGA.setid(this.idEntrega);
+      for(let i = 0 ; i < this.listPedidosSinRealizar.length ; i++){
+        this._pedidoService.pedidoRealizado(this.listPedidosSinRealizar[i].id, ENTREGA).subscribe(data => {
+          }, error => {
+            console.log(error);
+            this.toastr.error('Error al realizar pedido', 'ERROR AL MARCAR PEDIDO COMO REALIZADO ');
+          })
+    }
+      this.toastr.success('Se ha creado una entrega con estos pedidos', 'ENTREGA CREADA');
+      }, error => {
+        console.log(error);
+        this.toastr.error('Error al crear la entrega', 'ERROR AL CREAR ENTREGA ');
+      })
+    }
+    
       this.cliente = data;
     }, error => {
       console.log(error);
 
     })
 
-    var ENTREGA = new Entrega(this.idCliente,this.cliente.nombre,this.cliente.apellidos,this.cliente.direccionCompleta,this.cliente.telefono)
-    this._entregaService.guardarEntrega(ENTREGA).subscribe(data => {
-      this.toastr.success('Se ha crado una entrega con estos pedidos', 'ENTREGA CREADA');
-      }, error => {
-        console.log(error);
-        this.toastr.error('Error al crear la entrega', 'ERROR AL CREAR ENTREGA ');
-      })
+    
+          
+  }
 
-      for(let i = 0 ; i < this.listPedidosSinRealizar.length ; i++){
-        console.log(this.listPedidosSinRealizar[i])
-        this._pedidoService.pedidoRealizado(this.listPedidosSinRealizar[i].id, this.listPedidosSinRealizar[i]).subscribe(data => {
-          }, error => {
-            console.log(error);
-            this.toastr.error('Error al realizar pedido', 'ERROR AL MARCAR PEDIDO COMO REALIZADO ');
-          })
-    }
+  eliminarPedido(id: any){
+    this._pedidoService.eliminarPedido(id).subscribe(data =>{
+      this.toastr.error('El pedido ha sido eliminado correctamente', 'PEDIDO ELIMINADO');
+      this.listPedidosSinRealizar = [];
+      this.obtenerPedidos();
+      
+
+    }, error => {
+      console.log(error);
+    })
   }
 
 }

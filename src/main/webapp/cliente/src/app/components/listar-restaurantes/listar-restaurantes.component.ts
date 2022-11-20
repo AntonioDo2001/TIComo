@@ -21,7 +21,6 @@ export class ListarRestaurantesComponent implements OnInit {
 
   obtenerRestaurantes(){
     this._restauranteService.getRestaurantes().subscribe(data =>{
-      console.log(data);
       this.listRestaurantes = data;
     }, error => {
       console.log(error);
@@ -38,10 +37,10 @@ export class ListarRestaurantesComponent implements OnInit {
       console.log(error);
     })
   }
-  enviaridRestaurantePlato(idRestaurante: String | undefined){
-    var idRest : String = idRestaurante!;
-    this.helper.changeMessage(idRest.toString());
-    this.helper.customMessage.subscribe(msg => idRest = msg);
+  enviarnombreRestaurante(nombreRestaurante: String | undefined){
+    var nomRest : String = nombreRestaurante!;
+    this.helper.changeMessage(nomRest.toString());
+    this.helper.customMessage.subscribe(msg => nomRest = msg);
   }
 
 }

@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit {
       direccionCompleta: ['', Validators.required],
       telefono: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      passwordRep: ['', Validators.required]
 
     })
   }
@@ -55,6 +56,9 @@ export class RegisterComponent implements OnInit {
     else if(this.registerForm.get('password')?.value == ""){
       this.toastr.error('Debes introducir un password', 'CAMPO PASSWORD SIN RELLENAR');
     }
+    else if(this.registerForm.get('password')?.value != this.registerForm.get('passwordRep')?.value){
+      this.toastr.error('Las contraseñas no coinciden', 'REPETICIÓN DE CONTRASEÑA INCORRECTA');
+    }
     else{
       camposRellenos = true;
     }
@@ -64,7 +68,6 @@ export class RegisterComponent implements OnInit {
 
         var jsonRespuesta : JSON = res;
           var respuesta : string = JSON.stringify(jsonRespuesta);
-          console.log(respuesta);
           if(respuesta.includes("errorPassword")){
            this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
            this.registerForm.get('password')?.reset;
@@ -74,6 +77,9 @@ export class RegisterComponent implements OnInit {
           }
           else if(respuesta.includes("emailFormato")){
             this.toastr.error('El formato del email es incorrecto. Debe seguir un formato <<nombreCorreo@correo.terminacion>>', 'FORMATO DE EMAIL INVÁLIDO');
+          }
+          else if(respuesta.includes("tlfFormErr")){
+            this.toastr.error('El formato del telefono es incorrecto. Debe ser un número de 9 dígitos', 'FORMATO DE TELEFONO INVÁLIDO');
           }
           else{
             this.router.navigate(['/login']);

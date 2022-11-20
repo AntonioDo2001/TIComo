@@ -29,7 +29,6 @@ export class EditarPerfilClienteComponent implements OnInit {
 
     })
     this.id = this.aRouter.snapshot.paramMap.get('idCliente')!;
-    console.log(this.id);
   }
 
   ngOnInit(): void {
@@ -78,6 +77,9 @@ export class EditarPerfilClienteComponent implements OnInit {
         else if(respuesta.includes("errorPassword")){
          this.toastr.error('Formato de contraseña incorrecto. Debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número', 'PASSWORD INCORRECTA');
         }
+        else if(respuesta.includes("tlfFormErr")){
+          this.toastr.error('El formato del telefono es incorrecto. Debe ser un número de 9 dígitos', 'FORMATO DE TELEFONO INVÁLIDO');
+         }
         else{
           this.toastr.info('El perfil ha sido modificado correctamente!', 'PERFIL MODIFICADO');
           this.router.navigate(['/pagina-principal-cliente']);
