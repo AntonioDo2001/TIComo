@@ -29,8 +29,13 @@ export class PedidoService {
 
   }
 
+
   pedidoRealizado(id: String | undefined, entrega : Entrega): Observable<any>{
     return this.http.put(this.url + id,entrega);
+
+  pedidoRealizado(id: String | undefined, pedido:Pedido): Observable<any>{
+    return this.http.put(this.url + id,pedido);
+
   }
   
 
