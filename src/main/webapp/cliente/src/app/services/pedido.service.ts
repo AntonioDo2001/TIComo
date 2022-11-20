@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Entrega } from '../models/Entrega';
 import { Pedido } from '../models/Pedido';
 
 @Injectable({
@@ -26,6 +27,10 @@ export class PedidoService {
   obtenerPedidosCliente(idCliente : String): Observable<any>{
     return this.http.get(this.url + idCliente);
 
+  }
+
+  pedidoRealizado(id: String | undefined, entrega : Entrega): Observable<any>{
+    return this.http.put(this.url + id,entrega);
   }
   
 
