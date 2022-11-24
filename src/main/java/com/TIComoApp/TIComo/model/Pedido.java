@@ -1,3 +1,14 @@
+/*********************************************************************
+ *
+ * Class Name: Pedido
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira para todo lo relativo a la creación de pedidos(el plato elegida con la cantidad que pide el cliente ) del sistema TIComo
+ *
+ **********************************************************************
+ */
+
 package com.TIComoApp.TIComo.model;
 
 import org.springframework.data.annotation.Id;
@@ -5,6 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+//Para crear la coleccion en Mongo
 import lombok.Data;
 
 @Data
@@ -30,7 +42,7 @@ public class Pedido {
 	@NonNull
 	private String nombreRestaurante;
 	
-	
+	//Constructor
 	public Pedido(String id, String nombrePlato, int precioPlato, int cantidadPlato, String idCliente, String nombreRestaurante) {
 		super();
 		this.id = id;
@@ -43,7 +55,8 @@ public class Pedido {
 		this.idEntrega = "";
 		this.nombreRestaurante = nombreRestaurante;
 	}
-
+	
+	//Getters, Setters y toString
 	public String getId() {
 		return id;
 	}

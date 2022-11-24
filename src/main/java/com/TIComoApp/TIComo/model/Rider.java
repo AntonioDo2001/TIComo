@@ -1,9 +1,20 @@
+/*********************************************************************
+ *
+ * Class Name: Rider
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira para todo lo relativo a la creación de los riders del sistema TIComo
+ *
+ **********************************************************************
+ */
 package com.TIComoApp.TIComo.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+//Para crear la coleccion en Mongo
 import lombok.Data;
 
 @Data
@@ -18,6 +29,8 @@ public class Rider extends Usuario{
 	private String carnet;
 	@NonNull
 	private double valoracionMedia;
+	
+	//Constructor
 	public Rider(String id, String nombre, String apellidos, String email, String password, String NIF,
 			String tipoVehiculo, String matricula, String carnet) {
 		super(id, nombre, apellidos, email, password);
@@ -27,6 +40,7 @@ public class Rider extends Usuario{
 		this.carnet = carnet;
 		this.valoracionMedia = 0.0;
 	}
+	//Getters, Setters y toString
 	public String getNIF() {
 		return NIF;
 	}

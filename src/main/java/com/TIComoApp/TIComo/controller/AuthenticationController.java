@@ -1,3 +1,15 @@
+/*********************************************************************
+ *
+ * Class Name: AuthenticationController
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira de controlador para las funciones de resgistrarse el cliente y loguearse el administrador, el cliente y el rider en la base de datos
+ *
+ **********************************************************************
+ */
+
+
 package com.TIComoApp.TIComo.controller;
 
 import java.util.List;
@@ -28,8 +40,7 @@ import com.TIComoApp.TIComo.repository.RiderRepository;
 public class AuthenticationController {
 	static final  String ERRPWD= "errorPassword";
 	static final  String ERREMAIL= "emailRepetido";
-	static final  String EMFORMERR= "emailFormato";
-	static final  String ERRORTLF= "tlfFormErr";
+
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -40,6 +51,17 @@ public class AuthenticationController {
 	@Autowired
 	private RiderRepository riderRepository;
 
+	/*
+	* 
+	*
+	* Method name:create
+	* Description of the Method: se encarga de realizar el registro del cliente en la base de datos
+	* Calling arguments: un cliente(Es el que queremos introducir en la base de datos)
+	* Return value: un cliente
+	* Required Files: Tabla clientes de MongoDB
+	*
+	*
+	*/
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/register")
 	public
@@ -56,13 +78,7 @@ public class AuthenticationController {
 			}
 			if(emailRepetido) {
 				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
-			}else if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
-				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
-			}
-			else if(!cliente.telefonoValido(cliente.getTelefono())) {
-				return new Cliente(ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF); 
-			}
-			else {
+			}else {
 				return clienteRepository.save(cliente);
 			}
 			
@@ -71,6 +87,18 @@ public class AuthenticationController {
 			return new Cliente(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
 		}
 	}
+
+	/*
+	* 
+	*
+	* Method name:loginUser
+	* Description of the Method: se encarga de comprobar si el email y la contraseña introducidos pertenece a un administrador, un cliente o un rider de la base de datos
+	* Calling arguments: dos strings, el email y la contraseña (Son el email y la contraseña que queremos comprobar en la base de datos)
+	* Return value: un JsonObject
+	* Required Files: Tabla clientes, administradores y riders de MongoDB
+	*
+	*
+	*/
 	@GetMapping("/login/{email}/{password}")
 	public
 	JsonObject loginUser(@PathVariable String email, @PathVariable String password) {
@@ -128,7 +156,7 @@ public class AuthenticationController {
 		}
 		else if(esRiderLogin) {
 			if(BCrypt.checkpw(password, riderEncontrado.getPassword())) {
-				return new JsonObject("{\"respuesta\":\"riderLogin\",\"idRider\":\""+riderEncontrado.getId()+"\"}");
+				return new JsonObject("{\"respuesta\":\"riderLogin\"}");
 			}
 			else {
 				return new JsonObject("{\"respuesta\":\"Email o Password incorrecto\"}");

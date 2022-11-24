@@ -1,3 +1,15 @@
+/*********************************************************************
+ *
+ * Class Name: Entrega
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira para todo lo relativo a la creación de entregas (conjunto de pedidos) del sistema TIComo
+ *
+ **********************************************************************
+ */
+
+
 package com.TIComoApp.TIComo.model;
 
 import org.springframework.data.annotation.Id;
@@ -9,6 +21,7 @@ import java.util.Date;
 
 import com.mongodb.lang.NonNull;
 
+//Para crear la coleccion en Mongo
 import lombok.Data;
 
 @Data
@@ -41,6 +54,7 @@ public class Entrega {
 	@NonNull
 	private String nombreRestaurante;
 	
+	//Constructor
 	public Entrega(String id, String idCliente,String nombreCliente, String apellidosCliente, String direccion, String telefonoCliente, String pedidosRealizados, double precioTotal, String nombreRestaurante) {
 		super();
 		this.id = id;
@@ -59,6 +73,7 @@ public class Entrega {
 		this.fechayhora = dateFormat.format(new Date());
 	}
 
+	//Getters, Setters y toString
 	public String getId() {
 		return id;
 	}

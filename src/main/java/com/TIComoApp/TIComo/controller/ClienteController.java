@@ -1,3 +1,14 @@
+/*********************************************************************
+ *
+ * Class Name: ClienteController
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira de controlador para todas las funciones posibles de la clase cliente en la base de datos
+ *
+ **********************************************************************
+ */
+
 package com.TIComoApp.TIComo.controller;
 
 import java.util.List;
@@ -37,7 +48,17 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 		
 	
-	
+	/*
+	* 
+	*
+	* Method name:Index
+	* Description of the Method: se encarga de mostrar una lista de clientes de la base de datos
+	* Calling arguments: Ninguno
+	* Return value: List<Cliente>
+	* Required Files: Tabla clientes de MongoDB
+	*
+	*
+	*/
 	
 	@GetMapping("")
 	public
@@ -45,11 +66,35 @@ public class ClienteController {
 		return clienteRepository.findAll();
 	}
 	
+	/*
+	* 
+	*
+	* Method name: obtenerCliente
+	* Description of the Method: se encarga de obtener un cliente en concreto de la base de datos
+	* Calling arguments: Un id de cliente(para buscarle en la base de datos)
+	* Return value: Optional<Cliente>
+	* Required Files: Tabla clientes de MongoDB
+	*
+	*
+	*/
 	@GetMapping("/{id}")
-	public Optional<Cliente> obtenerCliente(@PathVariable String id) {
+	public
+	Optional<Cliente> obtenerCliente(@PathVariable String id) {
 		return clienteRepository.findById(id);
 		
 	}
+	
+	/*
+	* 
+	*
+	* Method name: create
+	* Description of the Method: se encarga de comprobar si el cliente que se está intentando crear en la base de datos sigue los criterios establecidos
+	* Calling arguments: Un cliente
+	* Return value: Un cliente
+	* Required Files: Tabla clientes de MongoDB
+	*
+	*
+	*/
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
@@ -86,6 +131,17 @@ public class ClienteController {
 		
 		
 	}
+	/*
+	* 
+	*
+	* Method name: update
+	* Description of the Method: se encarga de actualizar un cliente en concreto en la base de datos
+	* Calling arguments: Un id (Para buscar el cliente en la base de datos) y un cliente(Los datos nuevos del cliente)
+	* Return value: Un cliente
+	* Required Files: Tabla clientes de MongoDB
+	*
+	*
+	*/
 	
 	@PutMapping("/{id}")
 	public
@@ -109,9 +165,11 @@ public class ClienteController {
 					emailRepetido = true;
 				}
 			}
-
+			if(emailRepetido) {
+				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
+			}
 			
-			 if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
+			else if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
 				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
 			}
 			else if(!cliente.telefonoValido(cliente.getTelefono())) {
@@ -127,13 +185,35 @@ public class ClienteController {
 		
 		
 	}
+	/*
+	* 
+	*
+	* Method name: desactivarActivarCliente
+	* Description of the Method: se encarga de activar/desactivar un cliente en concreto en la base de datos
+	* Calling arguments: Un cliente (Para buscar el cliente en la base de datos)
+	* Return value: Un cliente
+	* Required Files: Tabla clientes de MongoDB
+	*
+	*
+	*/
 	@PutMapping("")
-	Cliente desactivarActivarRider(@RequestBody Cliente cliente) {
+	public
+	Cliente desactivarActivarCliente(@RequestBody Cliente cliente) {
 		Cliente clienteFromDB = clienteRepository.findById(cliente.getId()).orElseThrow(RuntimeException::new);
 		clienteFromDB.setCuentaActiva(cliente.isCuentaActiva());
 		return clienteRepository.save(clienteFromDB);
 	}
-	
+	/*
+	* 
+	*
+	* Method name: delete
+	* Description of the Method: se encarga de eliminar un cliente en concreto en la base de datos
+	* Calling arguments: Un id (Para buscar el cliente en la base de datos)
+	* Return value: void
+	* Required Files: Tabla clientes de MongoDB
+	*
+	*
+	*/
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public

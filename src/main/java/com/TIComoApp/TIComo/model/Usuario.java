@@ -1,3 +1,14 @@
+/*********************************************************************
+ *
+ * Class Name: Usuario
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira para todo lo relativo a la creación de la clase padre usuario, de la que luego se crean las clases clientes, riders y administradores del sistema TIComo
+ *
+ **********************************************************************
+ */
+
 package com.TIComoApp.TIComo.model;
 
 
@@ -10,6 +21,8 @@ import org.springframework.data.annotation.Id;
 
 import com.mongodb.lang.NonNull;
 
+
+//Para crear la coleccion en Mongo
 import lombok.Data;
 
 
@@ -30,7 +43,7 @@ public class Usuario {
 
 
 
-
+	//Constructor
 	public Usuario(String id, String nombre, String apellidos, String email, String password) {
 		this.id = id;
 		this.nombre = nombre;
@@ -43,7 +56,7 @@ public class Usuario {
 
 
 
-
+	//Getters, Setters y toString
 	public String getId() {
 		return id;
 	}

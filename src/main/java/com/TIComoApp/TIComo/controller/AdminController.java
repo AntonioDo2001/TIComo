@@ -1,3 +1,14 @@
+/*********************************************************************
+ *
+ * Class Name: AdministradorController
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira de controlador para todas las funciones posibles de la clase administrador en la base de datos
+ *
+ **********************************************************************
+ */
+
 package com.TIComoApp.TIComo.controller;
 
 import java.util.List;
@@ -28,25 +39,57 @@ import com.TIComoApp.TIComo.repository.AdministradorRepository;
 
 public class AdminController {
 	static final  String ERRPWD= "errorPassword";
-	static final  String EMFORMERR= "emailFormato";
 	
 	@Autowired
 	private AdministradorRepository adminRepository;
 		
 	
-	
-	
+	/*
+	* 
+	*
+	* Method name:Index
+	* Description of the Method: se encarga de mostrar una lista de administradores de la base de datos
+	* Calling arguments: Ninguno
+	* Return value: List<Administrador>
+	* Required Files: Tabla adminstradores de MongoDB
+	*
+	*
+	*/
 	@GetMapping("")
 	public
 	List<Administrador> index(){
 		return adminRepository.findAll();
 	}
 	
+	/*
+	* 
+	*
+	* Method name: obtenerAdmin
+	* Description of the Method: se encarga de obtener un administrador en concreto de la base de datos
+	* Calling arguments: Un id de administrador(Para buscarle en la base de datos)
+	* Return value: Optional<Administrador>
+	* Required Files: Tabla adminstradores de MongoDB
+	*
+	*
+	*/
 	@GetMapping("/{id}")
-	public Optional<Administrador> obtenerAdmin(@PathVariable String id) {
+	public
+	Optional<Administrador> obtenerAdmin(@PathVariable String id) {
 		return adminRepository.findById(id);
 		
 	}
+	
+	/*
+	* 
+	*
+	* Method name: create
+	* Description of the Method: se encarga de comprobar si el administrador que se está intentando crear en la base de datos sigue los criterios establecidos
+	* Calling arguments: Un administrador
+	* Return value: Un administrador
+	* Required Files: Tabla adminstradores de MongoDB
+	*
+	*
+	*/
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
@@ -56,18 +99,24 @@ public class AdminController {
 			String passwordAdmin = admin.getPassword();
 			admin.setPassword(BCrypt.hashpw(passwordAdmin, BCrypt.gensalt()));
 			
-			if(!admin.formatoCorreoCorrecto(admin.getEmail())) {
-				return new Administrador(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
-				
-			}else {
-				return adminRepository.save(admin);
-			}
+			return adminRepository.save(admin);
 		}
 		else {
 			return new Administrador(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
 		}
 	}
 	
+	/*
+	* 
+	*
+	* Method name: update
+	* Description of the Method: se encarga de actualizar un administrador en concreto en la base de datos
+	* Calling arguments: Un id (Para buscar el administrador en la base de datos) y un administrador(Los datos nuevos del administrador)
+	* Return value: Un administrador
+	* Required Files: Tabla adminstradores de MongoDB
+	*
+	*
+	*/
 	@PutMapping("/{id}")
 	public
 	Administrador update(@PathVariable String id, @RequestBody Administrador admin) {
@@ -80,11 +129,7 @@ public class AdminController {
 			adminFromDB.setEmail(admin.getEmail());
 			adminFromDB.setPassword(admin.getPassword());
 			
-			if(!admin.formatoCorreoCorrecto(admin.getEmail())) {
-				return new Administrador(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);
-			}else {
-				return adminRepository.save(adminFromDB);
-			}
+			return adminRepository.save(adminFromDB);
 		}
 		else {
 			return new Administrador(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
@@ -92,7 +137,17 @@ public class AdminController {
 		
 		
 	}
-	
+	/*
+	* 
+	*
+	* Method name: delete
+	* Description of the Method: se encarga de eliminar un administrador en concreto en la base de datos
+	* Calling arguments: Un id (Para buscar el administrador en la base de datos)
+	* Return value: void
+	* Required Files: Tabla adminstradores de MongoDB
+	*
+	*
+	*/
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public

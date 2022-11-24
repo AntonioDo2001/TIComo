@@ -1,13 +1,22 @@
-package com.TIComoApp.TIComo.model;
+/*********************************************************************
+ *
+ * Class Name: Plato
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira para todo lo relativo a la creación de los restaurantes del sistema TIComo
+ *
+ **********************************************************************
+ */
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package com.TIComoApp.TIComo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+//Para crear la coleccion en Mongo
 import lombok.Data;
 
 @Data
@@ -30,10 +39,8 @@ public class Restaurante {
 	private String email;
 	@NonNull
 	private String categoria;
-	@NonNull
-	private double valoracionMedia;
 	
-	
+	//Constructor
 	public Restaurante(String id, String nombre, String razonSocial, String CIF, String direccionCompleta,
 			String telefono, String email, String categoria) {
 		this.id = id;
@@ -44,9 +51,9 @@ public class Restaurante {
 		this.telefono = telefono;
 		this.email = email;
 		this.categoria = categoria;
-		this.valoracionMedia = 0.0;
 	}
 
+	//Getters, Setters y toString
 	public String getId() {
 		return id;
 	}
@@ -110,12 +117,6 @@ public class Restaurante {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	public double getValoracionMedia() {
-		return valoracionMedia;
-	}
-	public void setValoracionMedia(double valoracionMedia) {
-		this.valoracionMedia = valoracionMedia;
-	}
 
 	@Override
 	public String toString() {
@@ -123,32 +124,6 @@ public class Restaurante {
 				+ ", direccionCompleta=" + direccionCompleta + ", telefono=" + telefono + ", email=" + email
 				+ ", categoria=" + categoria + "]";
 	}
-	
-	public boolean telefonoValido(String telefono) {
-		if(telefono.length() == 9) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	public boolean formatoCorreoCorrecto(String email) {
-		// Patrón para validar el email
-        Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
- 
-        // El email a validar
- 
-        Matcher mather = pattern.matcher(email);
- 
-        if (mather.find() == true) {
-            return true;
-        } else {
-            return false;
-        }
-    
-    }
 	
 	
 	

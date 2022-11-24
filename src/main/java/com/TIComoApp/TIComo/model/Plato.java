@@ -1,9 +1,21 @@
+/*********************************************************************
+ *
+ * Class Name: Plato
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira para todo lo relativo a la creación de platos del sistema TIComo
+ *
+ **********************************************************************
+ */
+
 package com.TIComoApp.TIComo.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+//Para crear la coleccion en Mongo
 import lombok.Data;
 
 @Data
@@ -25,6 +37,7 @@ public class Plato {
 	@NonNull
 	private String nombreRestaurante;
 	
+	//Constructor
 	public Plato(String id, String nombre, String foto, String descripcion, double precio, boolean aptoVeganos,
 			String nombreRestaurante) {
 		this.id = id;
@@ -36,6 +49,7 @@ public class Plato {
 		this.nombreRestaurante = nombreRestaurante;
 	}
 
+	//Getters, Setters y toString
 	public String getId() {
 		return id;
 	}

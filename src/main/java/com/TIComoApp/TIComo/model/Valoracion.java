@@ -1,3 +1,14 @@
+/*********************************************************************
+ *
+ * Class Name: Valoraciones
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira para todo lo relativo a la creación de la clase de las valoraciones de los riders y los restaurantes
+ *
+ **********************************************************************
+ */
+
 package com.TIComoApp.TIComo.model;
 
 import org.springframework.data.annotation.Id;
@@ -5,6 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+//Para crear la coleccion en Mongo
 import lombok.Data;
 
 @Data
@@ -24,7 +36,7 @@ public class Valoracion {
 	private String idRiderOnombreRestaurante;
 
 	
-	
+	//Constructor
 	public Valoracion(String id, String esRiderORestaurante, int valoracion, String comentario,String idRiderOnombreRestaurante) {
 		super();
 		this.id = id;
@@ -34,6 +46,7 @@ public class Valoracion {
 		this.idRiderOnombreRestaurante = idRiderOnombreRestaurante;
 	}
 
+	//Getters, Setters y toString
 	public String getId() {
 		return id;
 	}

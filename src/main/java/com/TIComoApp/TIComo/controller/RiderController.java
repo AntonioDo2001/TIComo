@@ -1,3 +1,14 @@
+/*********************************************************************
+ *
+ * Class Name: RiderController
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira de controlador para todas las funciones posibles de la clase rider en la base de datos
+ *
+ **********************************************************************
+ */
+
 package com.TIComoApp.TIComo.controller;
 
 
@@ -37,7 +48,17 @@ public class RiderController {
 	private RiderRepository riderRepository;
 		
 	
-	
+	/*
+	* 
+	*
+	* Method name:Index
+	* Description of the Method: se encarga de mostrar una lista de riders de la base de datos
+	* Calling arguments: Ninguno
+	* Return value: List<Rider>
+	* Required Files: Tabla riders de MongoDB
+	*
+	*
+	*/
 	
 	@GetMapping("")
 	public
@@ -45,12 +66,35 @@ public class RiderController {
 		return riderRepository.findAll();
 	}
 	
+	/*
+	* 
+	*
+	* Method name: obtenerRider
+	* Description of the Method: se encarga de obtener un rider en concreto de la base de datos
+	* Calling arguments: Un id de rider(para buscarle en la base de datos)
+	* Return value: Optional<Rider>
+	* Required Files: Tabla riders de MongoDB
+	*
+	*
+	*/
+	
 	@GetMapping("/{id}")
-	public Optional<Rider> obtenerRider(@PathVariable String id) {
+	public
+	Optional<Rider> obtenerRider(@PathVariable String id) {
 		return riderRepository.findById(id);
 		
 	}
-	
+	/*
+	* 
+	*
+	* Method name: create
+	* Description of the Method: se encarga de comprobar si el rider que se está intentando crear en la base de datos sigue los criterios establecidos
+	* Calling arguments: Un rider
+	* Return value: Un rider
+	* Required Files: Tabla riders de MongoDB
+	*
+	*
+	*/
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
 	public
@@ -71,7 +115,17 @@ public class RiderController {
 			return new Rider(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);
 		}
 	}
-	
+	/*
+	* 
+	*
+	* Method name: update
+	* Description of the Method: se encarga de actualizar un rider en concreto en la base de datos
+	* Calling arguments: Un id (Para buscar el rider en la base de datos) y un rider(Los datos nuevos del cliente)
+	* Return value: Un rider
+	* Required Files: Tabla riders de MongoDB
+	*
+	*
+	*/
 	@PutMapping("/{id}")
 	public
 	Rider update(@PathVariable String id, @RequestBody Rider rider) {
@@ -104,15 +158,36 @@ public class RiderController {
 		
 	}
 	
-	
+	/*
+	* 
+	*
+	* Method name: desactivarActivarRider
+	* Description of the Method: se encarga de activar/desactivar un rider en concreto en la base de datos
+	* Calling arguments: Un rider (Para buscar el rider en la base de datos)
+	* Return value: Un rider
+	* Required Files: Tabla riders de MongoDB
+	*
+	*
+	*/
 	@PutMapping("")
-	public Rider desactivarActivarRider(@RequestBody Rider rider) {
+	public
+	Rider desactivarActivarRider(@RequestBody Rider rider) {
 		Rider riderFromDB = riderRepository.findById(rider.getId()).orElseThrow(RuntimeException::new);
 		riderFromDB.setCuentaActiva(rider.isCuentaActiva());
 		return riderRepository.save(riderFromDB);
 	}
 	
-	
+	/*
+	* 
+	*
+	* Method name: delete
+	* Description of the Method: se encarga de eliminar un rider en concreto en la base de datos
+	* Calling arguments: Un id (Para buscar el rider en la base de datos)
+	* Return value: void
+	* Required Files: Tabla riders de MongoDB
+	*
+	*
+	*/
 	
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)

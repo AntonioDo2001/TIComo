@@ -1,9 +1,21 @@
+/*********************************************************************
+ *
+ * Class Name: Cliente
+ * Author/s name: Ángel García Consuegra Trujillo, José Miguel Tercero Valero, Antonio Domínguez Martín, Roberto Ortuño Blanco y Javier Familiar Gijón
+ * Release/Creation date:
+ * Class version: ultima version(21/11/2022)
+ * Class description: Esta clase servira para todo lo relativo a la creación de los clientes del sistema TIComo
+ *
+ **********************************************************************
+ */
+
 package com.TIComoApp.TIComo.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+//Para crear la coleccion en Mongo
 import lombok.Data;
 
 @Data
@@ -17,6 +29,7 @@ public class Cliente extends Usuario{
 	@NonNull
 	private String telefono;
 	
+	//Constructor
 	public Cliente(String id, String nombre, String apellidos, String email, String password, String NIF,
 			String direccionCompleta, String telefono) {
 		super(id, nombre, apellidos, email, password);
@@ -24,7 +37,8 @@ public class Cliente extends Usuario{
 		this.direccionCompleta = direccionCompleta;
 		this.telefono = telefono;
 	}
-
+	
+	//Getters, Setters y toString
 	public String getNIF() {
 		return NIF;
 	}
