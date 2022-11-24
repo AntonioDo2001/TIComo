@@ -15,7 +15,7 @@
                             <th scope="col">Telefono</th>
                             <th scope="col">Email</th>
                             <th scope="col">Categoria</th>
-                            <th scope="col"></th>
+                            <th scope="col">Valoraciones</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -28,6 +28,7 @@
                             <td>{{ restaurante.email }}</td>
                             <td>{{ restaurante.categoria }}</td>
                             <td>
+                              <i [routerLink]="['/ver-valoraciones-restaurante', restaurante.nombre]" class="fa-solid fa-message"></i>
                             </td>
                           </tr>
                         </tbody>

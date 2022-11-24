@@ -16,8 +16,9 @@
                             <th scope="col">Matrícula</th>
                             <th scope="col">Carnet</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Password</th>
-                            <th scope="col"></th>
+                            <th scope="col">Editar/Eliminar Rider</th>
+                            <th scope="col">Activar/Desactivar Rider</th>
+                            <th scope="col">Valoraciones</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -29,12 +30,17 @@
                             <td>{{ rider.matricula }}</td>
                             <td>{{ rider.carnet }}</td>
                             <td>{{ rider.email }}</td>
-                            <td>*************</td>
                             <td>
                                 <i [routerLink]="['/editar-rider', rider.id]" class="fa-solid fa-user-pen text-primary"></i>
-                                <i (click)="eliminarRider(rider.id)" class="fa-solid fa-trash text-danger"></i>
-                                
+                                <i (click)="eliminarRider(rider.id)" class="fa-solid fa-trash text-danger"></i>      
                             </td>
+                            <td>
+                              <i (click)="activarRider(rider)" class="fa-solid fa-check"></i>
+                              <i (click)="desactivarRider(rider)" class="fa-solid fa-ban"></i>        
+                          </td>
+                          <td>
+                            <i [routerLink]="['/ver-valoraciones-rider', rider.id]" class="fa-solid fa-message"></i>
+                          </td>
                           </tr>
                         </tbody>
                       </table>

@@ -20,7 +20,6 @@ export class ListarRestaurantesClienteComponent implements OnInit {
 
   obtenerRestaurantes(){
     this._restauranteService.getRestaurantes().subscribe(data =>{
-      console.log(data);
       this.listRestaurantes = data;
     }, error => {
       console.log(error);

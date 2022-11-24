@@ -21,7 +21,6 @@ export class ListarRidersComponent implements OnInit {
 
   obtenerRiders(){
     this._riderService.getRiders().subscribe(data =>{
-      console.log(data);
       this.listRiders = data;
     }, error => {
       console.log(error);
@@ -37,6 +36,37 @@ export class ListarRidersComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+  activarRider(rider:Rider){
+    if(rider.cuentaActiva == true){
+      this.toastr.error('La cuenta del rider ya estaba activa', 'RIDER YA ACTIVO');
+    }
+    else{
+      rider.cuentaActiva = true;
+      this._riderService.activarODesactivarRider(rider).subscribe(data =>{
+        this.toastr.info('La cuenta del rider ha sido activada', 'RIDER ACTIVADO');
+      }, error=>{
+        console.log(error);
+        this.toastr.error('Error al activar cuenta del rider', 'ERROR ACTIVACION');
+      })
+    }
+    
+  }
+  desactivarRider(rider:Rider){
+    if(rider.cuentaActiva == false){
+      this.toastr.error('La cuenta del rider ya estaba desactivada', 'RIDER YA DESACTIVADO');
+    }
+    else{
+      rider.cuentaActiva = false;
+      this._riderService.activarODesactivarRider(rider).subscribe(data =>{
+        this.toastr.info('La cuenta del rider ha sido desactivada', 'RIDER DESACTIVADO');
+      }, error=>{
+        console.log(error);
+        this.toastr.error('Error al desactivar cuenta del rider', 'ERROR DESACTIVACION');
+      })
+    }
+    
   }
 
 }
