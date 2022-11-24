@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuthenticationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TIComo</a> &gt; <a href="index.source.html" class="el_package">com.TIComoApp.TIComo.controller</a> &gt; <span class="el_source">AuthenticationController.java</span></div><h1>AuthenticationController.java</h1><pre class="source lang-java linenums">package com.TIComoApp.TIComo.controller;
+
+import java.util.List;
+
+import org.bson.json.JsonObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
+import com.TIComoApp.TIComo.model.Administrador;
+import com.TIComoApp.TIComo.model.Cliente;
+import com.TIComoApp.TIComo.model.Rider;
+import com.TIComoApp.TIComo.repository.ClienteRepository;
+import com.TIComoApp.TIComo.repository.AdministradorRepository;
+import com.TIComoApp.TIComo.repository.RiderRepository;
+
+@CrossOrigin
+@RestController
+@RequestMapping(&quot;ticomo/authentication&quot;)
+<span class="fc" id="L28">public class AuthenticationController {</span>
+	static final  String ERRPWD= &quot;errorPassword&quot;;
+	static final  String ERREMAIL= &quot;emailRepetido&quot;;
+
+
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private AdministradorRepository adminRepository;
+	
+	@Autowired
+	private RiderRepository riderRepository;
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(&quot;/register&quot;)
+	public
+	Cliente create(@RequestBody Cliente cliente) {
+<span class="fc bfc" id="L46" title="All 2 branches covered.">		if(cliente.contraseniaSegura(cliente.getPassword())) {</span>
+<span class="fc" id="L47">			String passwordCliente = cliente.getPassword();</span>
+<span class="fc" id="L48">			cliente.setPassword(BCrypt.hashpw(passwordCliente, BCrypt.gensalt()));</span>
+<span class="fc" id="L49">			List&lt;Cliente&gt; listaClientes = clienteRepository.findAll();</span>
+<span class="fc" id="L50">			boolean emailRepetido = false;</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">			for(int i=0;i&lt;listaClientes.size();i++) {</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">				if(listaClientes.get(i).getEmail().equalsIgnoreCase(cliente.getEmail())) {</span>
+<span class="fc" id="L53">					emailRepetido = true;</span>
+				}
+			}
+<span class="fc bfc" id="L56" title="All 2 branches covered.">			if(emailRepetido) {</span>
+<span class="fc" id="L57">				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);</span>
+			}else {
+<span class="fc" id="L59">				return clienteRepository.save(cliente);</span>
+			}
+			
+		}
+		else {
+<span class="fc" id="L64">			return new Cliente(ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD,ERRPWD);</span>
+		}
+	}
+	@GetMapping(&quot;/login/{email}/{password}&quot;)
+	public
+	JsonObject loginUser(@PathVariable String email, @PathVariable String password) {
+<span class="fc" id="L70">		boolean esClienteLogin = false;</span>
+<span class="fc" id="L71">		boolean esRiderLogin = false;</span>
+<span class="fc" id="L72">		boolean esAdminLogin = false;</span>
+		
+<span class="fc" id="L74">		Cliente clienteEncontrado = null;</span>
+<span class="fc" id="L75">		Administrador adminEncontrado = null;</span>
+<span class="fc" id="L76">		Rider riderEncontrado = null;</span>
+		
+		
+<span class="fc" id="L79">		List&lt;Cliente&gt; listaClientes = clienteRepository.findAll();</span>
+<span class="fc" id="L80">		List&lt;Administrador&gt; listaAdmin = adminRepository.findAll();</span>
+<span class="fc" id="L81">		List&lt;Rider&gt; listaRider = riderRepository.findAll();</span>
+		
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		for(int i=0; i&lt;listaClientes.size();i++) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">			if(listaClientes.get(i).getEmail().equalsIgnoreCase(email)) {</span>
+<span class="fc" id="L85">				esClienteLogin = true;</span>
+<span class="fc" id="L86">				clienteEncontrado = listaClientes.get(i);</span>
+			}
+		}
+		
+<span class="fc bfc" id="L90" title="All 2 branches covered.">		for(int j=0; j&lt;listaAdmin.size();j++) {</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">			if(listaAdmin.get(j).getEmail().equalsIgnoreCase(email)) {</span>
+<span class="fc" id="L92">				esAdminLogin = true;</span>
+<span class="fc" id="L93">				adminEncontrado = listaAdmin.get(j);</span>
+			}
+		}
+		
+<span class="fc bfc" id="L97" title="All 2 branches covered.">		for(int k=0; k&lt;listaRider.size();k++) {</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">			if(listaRider.get(k).getEmail().equalsIgnoreCase(email)) {</span>
+<span class="fc" id="L99">				esRiderLogin = true;</span>
+<span class="fc" id="L100">				riderEncontrado = listaRider.get(k);</span>
+			}
+		}
+		
+<span class="fc bfc" id="L104" title="All 2 branches covered.">		if(esClienteLogin) {</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">			if(BCrypt.checkpw(password, clienteEncontrado.getPassword())) {</span>
+<span class="fc" id="L106">				return new JsonObject(&quot;{\&quot;respuesta\&quot;:\&quot;clienteLogin\&quot;,\&quot;idCliente\&quot;:\&quot;&quot;+clienteEncontrado.getId()+&quot;\&quot;}&quot;);</span>
+			}
+			else {
+<span class="nc" id="L109">				return new JsonObject(&quot;{\&quot;respuesta\&quot;:\&quot;Email o Password incorrectos\&quot;}&quot;);</span>
+			}
+			
+		}
+<span class="fc bfc" id="L113" title="All 2 branches covered.">		else if(esAdminLogin) {</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">			if(BCrypt.checkpw(password, adminEncontrado.getPassword())) {</span>
+<span class="fc" id="L115">				return new JsonObject(&quot;{\&quot;respuesta\&quot;:\&quot;adminLogin\&quot;&quot;);</span>
+			}
+			else {
+<span class="nc" id="L118">				return new JsonObject(&quot;{\&quot;respuesta\&quot;:\&quot;Email o Password  incorrecto\&quot;}&quot;);</span>
+			}
+			
+		}
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">		else if(esRiderLogin) {</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">			if(BCrypt.checkpw(password, riderEncontrado.getPassword())) {</span>
+<span class="fc" id="L124">				return new JsonObject(&quot;{\&quot;respuesta\&quot;:\&quot;riderLogin\&quot;}&quot;);</span>
+			}
+			else {
+<span class="nc" id="L127">				return new JsonObject(&quot;{\&quot;respuesta\&quot;:\&quot;Email o Password incorrecto\&quot;}&quot;);</span>
+				
+				
+				
+			}
+			
+		}
+		else {
+<span class="nc" id="L135">			return new JsonObject(&quot;{\&quot;respuesta\&quot;:\&quot;Email o Password incorrecto\&quot;}&quot;);</span>
+		}
+
+
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

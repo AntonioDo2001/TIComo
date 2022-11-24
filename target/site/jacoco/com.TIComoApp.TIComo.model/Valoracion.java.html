@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Valoracion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TIComo</a> &gt; <a href="index.source.html" class="el_package">com.TIComoApp.TIComo.model</a> &gt; <span class="el_source">Valoracion.java</span></div><h1>Valoracion.java</h1><pre class="source lang-java linenums">package com.TIComoApp.TIComo.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mongodb.lang.NonNull;
+
+import lombok.Data;
+
+@Data
+@Document(collection = &quot;valoraciones&quot;)
+public class Valoracion {
+	@Id
+	private String id;
+	@NonNull
+	private String idEntrega;
+	@NonNull
+	private String esRiderORestaurante;
+	@NonNull
+	private int valoracion;
+	@NonNull
+	private String comentario;
+	@NonNull
+	private String idRiderOnombreRestaurante;
+
+	
+	
+	public Valoracion(String id, String esRiderORestaurante, int valoracion, String comentario,String idRiderOnombreRestaurante) {
+<span class="fc" id="L29">		super();</span>
+<span class="fc" id="L30">		this.id = id;</span>
+<span class="fc" id="L31">		this.esRiderORestaurante = esRiderORestaurante;</span>
+<span class="fc" id="L32">		this.valoracion = valoracion;</span>
+<span class="fc" id="L33">		this.comentario = comentario;</span>
+<span class="fc" id="L34">		this.idRiderOnombreRestaurante = idRiderOnombreRestaurante;</span>
+<span class="fc" id="L35">	}</span>
+
+	public String getId() {
+<span class="fc" id="L38">		return id;</span>
+	}
+
+	public void setId(String id) {
+<span class="fc" id="L42">		this.id = id;</span>
+<span class="fc" id="L43">	}</span>
+
+	public String getEsRiderORestaurante() {
+<span class="fc" id="L46">		return esRiderORestaurante;</span>
+	}
+
+	public void setEsRiderORestaurante(String esRiderORestaurante) {
+<span class="fc" id="L50">		this.esRiderORestaurante = esRiderORestaurante;</span>
+<span class="fc" id="L51">	}</span>
+
+
+	public int getValoracion() {
+<span class="fc" id="L55">		return valoracion;</span>
+	}
+
+	public void setValoracion(int valoracion) {
+<span class="fc" id="L59">		this.valoracion = valoracion;</span>
+<span class="fc" id="L60">	}</span>
+
+	public String getComentario() {
+<span class="fc" id="L63">		return comentario;</span>
+	}
+
+	public void setComentario(String comentario) {
+<span class="fc" id="L67">		this.comentario = comentario;</span>
+<span class="fc" id="L68">	}</span>
+	public String getIdRiderOnombreRestaurante() {
+<span class="nc" id="L70">		return idRiderOnombreRestaurante;</span>
+	}
+	public void setIdRiderOnombreRestaurante(String idRiderOnombreRestaurante) {
+<span class="nc" id="L73">		this.idRiderOnombreRestaurante = idRiderOnombreRestaurante;</span>
+<span class="nc" id="L74">	}</span>
+	public String getIdEntrega() {
+<span class="nc" id="L76">		return idEntrega;</span>
+	}
+	public void setIdEntrega(String idEntrega) {
+<span class="nc" id="L79">		this.idEntrega = idEntrega;</span>
+<span class="nc" id="L80">	}</span>
+
+	@Override
+	public String toString() {
+<span class="fc" id="L84">		return &quot;Valoracion [id=&quot; + id + &quot;, esRiderORestaurante=&quot; + esRiderORestaurante + &quot;, valoracion=&quot; + valoracion + &quot;, comentario=&quot; + comentario + &quot;]&quot;;</span>
+	}
+	
+
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

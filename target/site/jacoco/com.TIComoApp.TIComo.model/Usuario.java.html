@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Usuario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TIComo</a> &gt; <a href="index.source.html" class="el_package">com.TIComoApp.TIComo.model</a> &gt; <span class="el_source">Usuario.java</span></div><h1>Usuario.java</h1><pre class="source lang-java linenums">package com.TIComoApp.TIComo.model;
+
+
+
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.springframework.data.annotation.Id;
+
+import com.mongodb.lang.NonNull;
+
+import lombok.Data;
+
+
+@Data
+public class Usuario {
+	@Id
+	private String id;
+	@NonNull
+	private String nombre;
+	@NonNull
+	private String apellidos;
+	@NonNull
+	private String email;
+	@NonNull
+	private String password;
+	@NonNull
+	private boolean cuentaActiva;
+
+
+
+
+<span class="fc" id="L34">	public Usuario(String id, String nombre, String apellidos, String email, String password) {</span>
+<span class="fc" id="L35">		this.id = id;</span>
+<span class="fc" id="L36">		this.nombre = nombre;</span>
+<span class="fc" id="L37">		this.apellidos = apellidos;</span>
+<span class="fc" id="L38">		this.email = email;</span>
+<span class="fc" id="L39">		this.password = password;</span>
+<span class="fc" id="L40">		this.cuentaActiva = true;</span>
+
+<span class="fc" id="L42">	}</span>
+
+
+
+
+	public String getId() {
+<span class="fc" id="L48">		return id;</span>
+	}
+
+
+
+
+	public void setId(String id) {
+<span class="fc" id="L55">		this.id = id;</span>
+<span class="fc" id="L56">	}</span>
+
+
+
+
+	public String getNombre() {
+<span class="fc" id="L62">		return nombre;</span>
+	}
+
+
+
+
+	public void setNombre(String nombre) {
+<span class="fc" id="L69">		this.nombre = nombre;</span>
+<span class="fc" id="L70">	}</span>
+
+
+
+
+	public String getApellidos() {
+<span class="fc" id="L76">		return apellidos;</span>
+	}
+
+
+
+
+	public void setApellidos(String apellidos) {
+<span class="fc" id="L83">		this.apellidos = apellidos;</span>
+<span class="fc" id="L84">	}</span>
+
+
+
+
+	public String getEmail() {
+<span class="fc" id="L90">		return email;</span>
+	}
+
+
+
+
+	public void setEmail(String email) {
+<span class="fc" id="L97">		this.email = email;</span>
+<span class="fc" id="L98">	}</span>
+
+
+
+
+	public String getPassword() {
+<span class="fc" id="L104">		return password;</span>
+	}
+
+
+
+
+	public void setPassword(String password) {
+<span class="fc" id="L111">		this.password = password;</span>
+<span class="fc" id="L112">	}</span>
+    public boolean isCuentaActiva() {
+<span class="fc" id="L114">		return cuentaActiva;</span>
+	}
+    public void setCuentaActiva(boolean cuentaActiva) {
+<span class="fc" id="L117">		this.cuentaActiva = cuentaActiva;</span>
+<span class="fc" id="L118">	}</span>
+
+
+	@Override
+	public String toString() {
+<span class="nc" id="L123">		return super.toString();</span>
+	}
+
+	public boolean contraseniaSegura(String password) {
+<span class="fc" id="L127">		boolean segura = false;</span>
+		char clave;
+<span class="fc" id="L129">		int  contNumero = 0, contLetraMay = 0, contLetraMin=0;</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">		for (int i = 0; i &lt; password.length(); i++) {</span>
+<span class="fc" id="L131">			clave = password.charAt(i);</span>
+<span class="fc" id="L132">			String passValue = String.valueOf(clave);</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">			if (passValue.matches(&quot;[A-Z]&quot;)) {</span>
+<span class="fc" id="L134">				contLetraMay++;</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">			} else if (passValue.matches(&quot;[a-z]&quot;)) {</span>
+<span class="fc" id="L136">				contLetraMin++;</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">			} else if (passValue.matches(&quot;[0-9]&quot;)) {</span>
+<span class="fc" id="L138">				contNumero++;</span>
+			}
+		}
+<span class="pc bpc" id="L141" title="2 of 8 branches missed.">		if(contLetraMay&gt;0 &amp;&amp; contLetraMin&gt;0 &amp;&amp; contNumero&gt;0 &amp;&amp; password.length()&gt;=8) {</span>
+<span class="fc" id="L142">			segura = true;</span>
+		}
+<span class="fc" id="L144">		return segura;</span>
+
+
+	}
+	
+	
+	
+	public boolean formatoCorreoCorrecto(String email) {
+		// Patrón para validar el email
+<span class="fc" id="L153">        Pattern pattern = Pattern</span>
+<span class="fc" id="L154">                .compile(&quot;^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@&quot;</span>
+                        + &quot;[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$&quot;);
+ 
+        // El email a validar
+ 
+<span class="fc" id="L159">        Matcher mather = pattern.matcher(email);</span>
+ 
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        if (mather.find() == true) {</span>
+<span class="fc" id="L162">            return true;</span>
+        } else {
+<span class="fc" id="L164">            return false;</span>
+        }
+    
+    }
+    
+
+	
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

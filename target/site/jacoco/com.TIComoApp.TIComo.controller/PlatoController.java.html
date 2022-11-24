@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlatoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TIComo</a> &gt; <a href="index.source.html" class="el_package">com.TIComoApp.TIComo.controller</a> &gt; <span class="el_source">PlatoController.java</span></div><h1>PlatoController.java</h1><pre class="source lang-java linenums">package com.TIComoApp.TIComo.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.TIComoApp.TIComo.model.Plato;
+import com.TIComoApp.TIComo.repository.PlatoRepository;
+
+@CrossOrigin
+@RestController
+@RequestMapping(&quot;ticomo/platos&quot;)
+
+
+
+<span class="fc" id="L28">public class PlatoController {</span>
+	
+	@Autowired
+	private PlatoRepository platoRepository;
+		
+	
+	
+	
+	@GetMapping(&quot;&quot;)
+	public
+	List&lt;Plato&gt; index(){
+<span class="fc" id="L39">		return platoRepository.findAll();</span>
+	}
+	
+	@GetMapping(&quot;/{id}&quot;)
+	public
+	Optional&lt;Plato&gt; obtenerPlato(@PathVariable String id) {
+<span class="fc" id="L45">		return platoRepository.findById(id);</span>
+		
+	}
+	
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(&quot;&quot;)
+	public
+	Plato create(@RequestBody Plato plato) {
+<span class="fc" id="L53">		return platoRepository.save(plato);</span>
+	}
+	
+	@PutMapping(&quot;/{id}&quot;)
+	public
+	Plato update(@PathVariable String id, @RequestBody Plato plato) {
+<span class="fc" id="L59">		Plato platoFromDB = platoRepository.findById(id).orElseThrow(RuntimeException::new);</span>
+		
+<span class="fc" id="L61">		platoFromDB.setNombre(plato.getNombre());</span>
+<span class="fc" id="L62">		platoFromDB.setFoto(plato.getFoto());</span>
+<span class="fc" id="L63">		platoFromDB.setDescripcion(plato.getDescripcion());</span>
+<span class="fc" id="L64">		platoFromDB.setPrecio(plato.getPrecio());</span>
+<span class="fc" id="L65">		platoFromDB.setAptoVeganos(plato.isAptoVeganos());</span>
+<span class="fc" id="L66">		platoFromDB.setNombreRestaurante(plato.getNombreRestaurante());</span>
+		
+		
+<span class="fc" id="L69">		return platoRepository.save(platoFromDB);</span>
+		
+	}
+	
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping(&quot;/{id}&quot;)
+	public
+	void delete(@PathVariable String id) {
+<span class="fc" id="L77">		Plato plato = platoRepository.findById(id).orElseThrow(RuntimeException::new);</span>
+<span class="fc" id="L78">		platoRepository.delete(plato);</span>
+
+<span class="fc" id="L80">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

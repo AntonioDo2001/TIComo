@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Restaurante.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TIComo</a> &gt; <a href="index.source.html" class="el_package">com.TIComoApp.TIComo.model</a> &gt; <span class="el_source">Restaurante.java</span></div><h1>Restaurante.java</h1><pre class="source lang-java linenums">package com.TIComoApp.TIComo.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mongodb.lang.NonNull;
+
+import lombok.Data;
+
+@Data
+@Document(collection = &quot;restaurantes&quot;)
+public class Restaurante {
+
+	@Id
+	private String id;
+	@NonNull
+	private String nombre;
+	@NonNull
+	private String razonSocial;
+	@NonNull
+	private String CIF;
+	@NonNull
+	private String direccionCompleta;
+	@NonNull
+	private String telefono;
+	@NonNull
+	private String email;
+	@NonNull
+	private String categoria;
+	
+<span class="fc" id="L31">	public Restaurante(String id, String nombre, String razonSocial, String CIF, String direccionCompleta,</span>
+			String telefono, String email, String categoria) {
+<span class="fc" id="L33">		this.id = id;</span>
+<span class="fc" id="L34">		this.nombre = nombre;</span>
+<span class="fc" id="L35">		this.razonSocial = razonSocial;</span>
+<span class="fc" id="L36">		this.CIF = CIF;</span>
+<span class="fc" id="L37">		this.direccionCompleta = direccionCompleta;</span>
+<span class="fc" id="L38">		this.telefono = telefono;</span>
+<span class="fc" id="L39">		this.email = email;</span>
+<span class="fc" id="L40">		this.categoria = categoria;</span>
+<span class="fc" id="L41">	}</span>
+
+	public String getId() {
+<span class="fc" id="L44">		return id;</span>
+	}
+
+	public void setId(String id) {
+<span class="fc" id="L48">		this.id = id;</span>
+<span class="fc" id="L49">	}</span>
+
+	public String getNombre() {
+<span class="fc" id="L52">		return nombre;</span>
+	}
+
+	public void setNombre(String nombre) {
+<span class="fc" id="L56">		this.nombre = nombre;</span>
+<span class="fc" id="L57">	}</span>
+
+	public String getRazonSocial() {
+<span class="fc" id="L60">		return razonSocial;</span>
+	}
+
+	public void setRazonSocial(String razonSocial) {
+<span class="fc" id="L64">		this.razonSocial = razonSocial;</span>
+<span class="fc" id="L65">	}</span>
+
+	public String getCIF() {
+<span class="fc" id="L68">		return CIF;</span>
+	}
+
+	public void setCIF(String CIF) {
+<span class="fc" id="L72">		this.CIF = CIF;</span>
+<span class="fc" id="L73">	}</span>
+
+	public String getDireccionCompleta() {
+<span class="fc" id="L76">		return direccionCompleta;</span>
+	}
+
+	public void setDireccionCompleta(String direccionCompleta) {
+<span class="fc" id="L80">		this.direccionCompleta = direccionCompleta;</span>
+<span class="fc" id="L81">	}</span>
+
+	public String getTelefono() {
+<span class="fc" id="L84">		return telefono;</span>
+	}
+
+	public void setTelefono(String telefono) {
+<span class="fc" id="L88">		this.telefono = telefono;</span>
+<span class="fc" id="L89">	}</span>
+
+	public String getEmail() {
+<span class="fc" id="L92">		return email;</span>
+	}
+
+	public void setEmail(String email) {
+<span class="fc" id="L96">		this.email = email;</span>
+<span class="fc" id="L97">	}</span>
+
+	public String getCategoria() {
+<span class="fc" id="L100">		return categoria;</span>
+	}
+
+	public void setCategoria(String categoria) {
+<span class="fc" id="L104">		this.categoria = categoria;</span>
+<span class="fc" id="L105">	}</span>
+
+	@Override
+	public String toString() {
+<span class="fc" id="L109">		return &quot;Restaurante [id=&quot; + id + &quot;, nombre=&quot; + nombre + &quot;, razonSocial=&quot; + razonSocial + &quot;, CIF=&quot; + CIF</span>
+<span class="fc" id="L110">				+ &quot;, direccionCompleta=&quot; + direccionCompleta + &quot;, telefono=&quot; + telefono + &quot;, email=&quot; + email</span>
+<span class="fc" id="L111">				+ &quot;, categoria=&quot; + categoria + &quot;]&quot;;</span>
+	}
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
