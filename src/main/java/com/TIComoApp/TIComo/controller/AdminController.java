@@ -37,18 +37,20 @@ public class AdminController {
 	
 	
 	@GetMapping("")
+	public
 	List<Administrador> index(){
 		return adminRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	Optional<Administrador> obtenerAdmin(@PathVariable String id) {
+	public Optional<Administrador> obtenerAdmin(@PathVariable String id) {
 		return adminRepository.findById(id);
 		
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
+	public
 	Administrador create(@RequestBody Administrador admin) {
 		if(admin.contraseniaSegura(admin.getPassword())) {
 			String passwordAdmin = admin.getPassword();
@@ -67,6 +69,7 @@ public class AdminController {
 	}
 	
 	@PutMapping("/{id}")
+	public
 	Administrador update(@PathVariable String id, @RequestBody Administrador admin) {
 		if(admin.contraseniaSegura(admin.getPassword())) {
 			Administrador adminFromDB = adminRepository.findById(id).orElseThrow(RuntimeException::new);
@@ -92,6 +95,7 @@ public class AdminController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
+	public
 	void delete(@PathVariable String id) {
 		Administrador admin = adminRepository.findById(id).orElseThrow(RuntimeException::new);
 		adminRepository.delete(admin);

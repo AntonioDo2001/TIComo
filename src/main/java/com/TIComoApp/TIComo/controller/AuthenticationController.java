@@ -42,6 +42,7 @@ public class AuthenticationController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/register")
+	public
 	Cliente create(@RequestBody Cliente cliente) {
 		if(cliente.contraseniaSegura(cliente.getPassword())) {
 			String passwordCliente = cliente.getPassword();
@@ -71,6 +72,7 @@ public class AuthenticationController {
 		}
 	}
 	@GetMapping("/login/{email}/{password}")
+	public
 	JsonObject loginUser(@PathVariable String email, @PathVariable String password) {
 		boolean esClienteLogin = false;
 		boolean esRiderLogin = false;

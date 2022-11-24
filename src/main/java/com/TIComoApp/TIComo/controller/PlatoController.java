@@ -34,23 +34,25 @@ public class PlatoController {
 	
 	
 	@GetMapping("")
-	List<Plato> index(){
+	public List<Plato> index(){
 		return platoRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	Optional<Plato> obtenerPlato(@PathVariable String id) {
+	public Optional<Plato> obtenerPlato(@PathVariable String id) {
 		return platoRepository.findById(id);
 		
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
+	public
 	Plato create(@RequestBody Plato plato) {
 		return platoRepository.save(plato);
 	}
 	
 	@PutMapping("/{id}")
+	public
 	Plato update(@PathVariable String id, @RequestBody Plato plato) {
 		Plato platoFromDB = platoRepository.findById(id).orElseThrow(RuntimeException::new);
 		
@@ -68,6 +70,7 @@ public class PlatoController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
+	public
 	void delete(@PathVariable String id) {
 		Plato plato = platoRepository.findById(id).orElseThrow(RuntimeException::new);
 		platoRepository.delete(plato);

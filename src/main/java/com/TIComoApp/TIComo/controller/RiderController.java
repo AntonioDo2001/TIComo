@@ -40,18 +40,20 @@ public class RiderController {
 	
 	
 	@GetMapping("")
+	public
 	List<Rider> index(){
 		return riderRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	Optional<Rider> obtenerRider(@PathVariable String id) {
+	public Optional<Rider> obtenerRider(@PathVariable String id) {
 		return riderRepository.findById(id);
 		
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
+	public
 	Rider create(@RequestBody Rider rider) {
 		if(rider.contraseniaSegura(rider.getPassword())) {
 			String passwordRider = rider.getPassword();
@@ -71,6 +73,7 @@ public class RiderController {
 	}
 	
 	@PutMapping("/{id}")
+	public
 	Rider update(@PathVariable String id, @RequestBody Rider rider) {
 		Rider riderFromDB = riderRepository.findById(id).orElseThrow(RuntimeException::new);
 		if(rider.contraseniaSegura(rider.getPassword())) {
@@ -103,7 +106,7 @@ public class RiderController {
 	
 	
 	@PutMapping("")
-	Rider desactivarActivarRider(@RequestBody Rider rider) {
+	public Rider desactivarActivarRider(@RequestBody Rider rider) {
 		Rider riderFromDB = riderRepository.findById(rider.getId()).orElseThrow(RuntimeException::new);
 		riderFromDB.setCuentaActiva(rider.isCuentaActiva());
 		return riderRepository.save(riderFromDB);
@@ -114,6 +117,7 @@ public class RiderController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
+	public
 	void delete(@PathVariable String id) {
 		Rider rider = riderRepository.findById(id).orElseThrow(RuntimeException::new);
 		riderRepository.delete(rider);

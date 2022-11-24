@@ -34,6 +34,7 @@ public class ValoracionController {
 	
 	
 	@GetMapping("")
+	public
 	List<Valoracion> index(){
 		return valoracionRepository.findAll();
 	}
@@ -41,6 +42,7 @@ public class ValoracionController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
+	public
 	Valoracion create(@RequestBody Valoracion valoracion) {
 		
 		return valoracionRepository.save(valoracion);

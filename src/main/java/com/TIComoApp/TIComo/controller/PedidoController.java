@@ -38,6 +38,7 @@ public class PedidoController {
 	
 	
 	@GetMapping("/{id}")
+	public
 	List<Pedido> obtenerPedidos(@PathVariable String id) {
 		List<Pedido> pedidos = pedidoRepository.findAll();
 		List<Pedido> pedidosCliente = new ArrayList<Pedido>();		
@@ -52,11 +53,13 @@ public class PedidoController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
+	public
 	Pedido create(@RequestBody Pedido pedido) {
 		return pedidoRepository.save(pedido);
 	}
 	
 	@PutMapping("/{id}")
+	public
 	Pedido pedidoRealizado(@PathVariable String id,@RequestBody Entrega entrega) {
 			Pedido pedidoFromDB = pedidoRepository.findById(id).orElseThrow(RuntimeException::new);		
 			pedidoFromDB.setPedidoRealizado(true);	
@@ -68,6 +71,7 @@ public class PedidoController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
+	public
 	void delete(@PathVariable String id) {
 		Pedido pedido = pedidoRepository.findById(id).orElseThrow(RuntimeException::new);
 		pedidoRepository.delete(pedido);

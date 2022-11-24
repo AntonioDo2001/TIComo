@@ -41,6 +41,7 @@ public class EntregaController {
 	
 	
 	@GetMapping("/{id}")
+	public
 	List<Entrega> obtenerEntregasCliente(@PathVariable String id) {
 		List<Entrega> entregas = entregaRepository.findAll();
 		List<Entrega> entregasCliente = new ArrayList<Entrega>();		
@@ -56,12 +57,14 @@ public class EntregaController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
+	public
 	Entrega create(@RequestBody Entrega entrega) {
 		return entregaRepository.save(entrega);
 	}
 	
 	
 	@PutMapping("/{id}")
+	public
 	Entrega asignarRider(@PathVariable String id, @RequestBody String idRider) {
 		Entrega entregaFromDB = entregaRepository.findById(id).orElseThrow(RuntimeException::new);
 		entregaFromDB.setIdRider(idRider);
@@ -73,6 +76,7 @@ public class EntregaController {
 	
 	
 	@PutMapping("")
+	public
 	Entrega marcarEntregado(@RequestBody Entrega entrega) {
 		Entrega entregaFromDB = entregaRepository.findById(entrega.getId()).orElseThrow(RuntimeException::new);
 		entregaFromDB.setEntregado(true);
@@ -86,6 +90,7 @@ public class EntregaController {
 		
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
+	public
 	void delete(@PathVariable String id) {
 		Entrega entrega = entregaRepository.findById(id).orElseThrow(RuntimeException::new);
 		entregaRepository.delete(entrega);

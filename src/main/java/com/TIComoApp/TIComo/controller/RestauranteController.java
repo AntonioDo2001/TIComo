@@ -38,18 +38,20 @@ public class RestauranteController {
 	
 	
 	@GetMapping("")
+	public
 	List<Restaurante> index(){
 		return restauranteRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	Optional<Restaurante> obtenerRestaurante(@PathVariable String id) {
+	public Optional<Restaurante> obtenerRestaurante(@PathVariable String id) {
 		return restauranteRepository.findById(id);
 		
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
+	public
 	Restaurante create(@RequestBody Restaurante restaurante) {
 		if(!restaurante.telefonoValido(restaurante.getTelefono())) {
 			return new Restaurante(ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF,ERRORTLF);
@@ -63,6 +65,7 @@ public class RestauranteController {
 	}
 	
 	@PutMapping("/{id}")
+	public
 	Restaurante update(@PathVariable String id, @RequestBody Restaurante restaurante) {
 		Restaurante restauranteFromDB = restauranteRepository.findById(id).orElseThrow(RuntimeException::new);
 		if(!restaurante.telefonoValido(restaurante.getTelefono())) {
@@ -88,6 +91,7 @@ public class RestauranteController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
+	public
 	void delete(@PathVariable String id) {
 		Restaurante restaurante = restauranteRepository.findById(id).orElseThrow(RuntimeException::new);
 		restauranteRepository.delete(restaurante);

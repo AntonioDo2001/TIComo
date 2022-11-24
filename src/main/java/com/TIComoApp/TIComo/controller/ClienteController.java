@@ -40,18 +40,20 @@ public class ClienteController {
 	
 	
 	@GetMapping("")
+	public
 	List<Cliente> index(){
 		return clienteRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	Optional<Cliente> obtenerCliente(@PathVariable String id) {
+	public Optional<Cliente> obtenerCliente(@PathVariable String id) {
 		return clienteRepository.findById(id);
 		
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("")
+	public
 	Cliente create(@RequestBody Cliente cliente) {
 		if(cliente.contraseniaSegura(cliente.getPassword())) {
 			String passwordCliente = cliente.getPassword();
@@ -86,6 +88,7 @@ public class ClienteController {
 	}
 	
 	@PutMapping("/{id}")
+	public
 	Cliente update(@PathVariable String id, @RequestBody Cliente cliente) {
 		if(cliente.contraseniaSegura(cliente.getPassword())) {
 			Cliente clienteFromDB = clienteRepository.findById(id).orElseThrow(RuntimeException::new);
@@ -106,11 +109,9 @@ public class ClienteController {
 					emailRepetido = true;
 				}
 			}
-			if(emailRepetido) {
-				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
-			}
+
 			
-			else if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
+			 if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
 				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
 			}
 			else if(!cliente.telefonoValido(cliente.getTelefono())) {
@@ -135,6 +136,7 @@ public class ClienteController {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
+	public
 	void delete(@PathVariable String id) {
 		Cliente cliente = clienteRepository.findById(id).orElseThrow(RuntimeException::new);
 		clienteRepository.delete(cliente);
