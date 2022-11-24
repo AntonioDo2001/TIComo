@@ -27,7 +27,11 @@ export class EntregaService {
     return this.http.post(this.url, entrega);
   }
 
-  asignarRider(id : String, idRider: String): Observable<any>{
+  marcarEntregaEntregado(entrega:Entrega) : Observable<any>{
+    return this.http.put(this.url,entrega);
+  }
+
+  asignarRider(id : String|undefined, idRider: String): Observable<any>{
     return this.http.put(this.url + id, idRider );
 
   }

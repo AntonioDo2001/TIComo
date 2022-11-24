@@ -31,5 +31,9 @@ export class RiderService {
     return this.http.put(this.url + id, rider);
   }
 
+  activarODesactivarRider(rider:Rider): Observable<any>{
+    return this.http.put(this.url,rider);
+  }
+
 
 }
