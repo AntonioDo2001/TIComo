@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.TIComoApp.TIComo.ClienteControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.954 s <<< FAILURE! - in com.TIComoApp.TIComo.ClienteControllerTest
+testB  Time elapsed: 0.85 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Cliente [NIF=62000000C, direccionCompleta=Calle Desengaño 21 3ºC, telefono=123456787]> but was: <Cliente [NIF=emailRepetido, direccionCompleta=emailRepetido, telefono=emailRepetido]>
+	at com.TIComoApp.TIComo.ClienteControllerTest.testB(ClienteControllerTest.java:61)
+

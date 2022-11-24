@@ -1,0 +1,16 @@
+com\TIComoApp\TIComo\ClienteTest.class
+com\TIComoApp\TIComo\PlatoControllerTest.class
+com\TIComoApp\TIComo\RestauranteControllerTest.class
+com\TIComoApp\TIComo\FacturacionTest.class
+com\TIComoApp\TIComo\RegisterTest.class
+com\TIComoApp\TIComo\RiderTest.class
+com\TIComoApp\TIComo\ClienteControllerTest.class
+com\TIComoApp\TIComo\PlatoTest.class
+com\TIComoApp\TIComo\RiderControllerTest.class
+com\TIComoApp\TIComo\ValoracionTest.class
+com\TIComoApp\TIComo\RestauranteTest.class
+com\TIComoApp\TIComo\PedidoControllerTest.class
+com\TIComoApp\TIComo\AdministradorTest.class
+com\TIComoApp\TIComo\PedidoTest.class
+com\TIComoApp\TIComo\EntregaControllerTest.class
+com\TIComoApp\TIComo\EntregaTest.class
