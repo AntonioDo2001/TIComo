@@ -38,5 +38,17 @@ public class PlatoControllerTest {
 	   assertEquals(pla.toString(),pla2.toString());
 
 	}
+   @Test
+   void testD() {
+	   platocontroller.index();
+       
+      
+      }
+   @Test
+   void testE() {
+       platocontroller.obtenerPlato("6362502047774a5c1af31a35");
+       
+      
+      }
 
 }

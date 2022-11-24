@@ -1,5 +1,6 @@
 package com.TIComoApp.TIComo;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -27,40 +28,57 @@ public class RestauranteControllerTest {
    @Autowired
    private RestauranteController restaurantecontroller;
    
-   Restaurante res=new Restaurante("1A","Antonio","Tomás","Toledo", "Calle Desengaño 21 3ºA", "600000000", "h", "h");;
-
    @Rule
    public ExpectedException exception = ExpectedException.none();
   
+   
+	Restaurante res= new Restaurante("1A","El molino","Comidas Manchegas S.L","A1B2C3D4", "Calle Desengaño 7", "656987125", "elmolinno@gmail.com", "Comida tradicional");
+	Restaurante res4= new Restaurante("1T","Tomas","Tomás","Aquino Hayquienviva", "Calle Desengaño 26 3ºA", "600000008", "restaurant2@gmail.es", "Categoria ejemplo");
+	Restaurante res2= new Restaurante("1B","Paco","Tomás","Aquino Hayquienviva", "Calle Desengaño 26 3ºA", "600000008", "restaurante", "Categoria ejemplo");
+	Restaurante res3= new Restaurante("1C","Juan","Tomás","Aquino Hayquienviva", "Calle Desengaño 23 3ºA", "60000787887487847", "restaurante@prueba.com", "Categoria ejemplo");
+
+	
    @Test
    void testCrearRestaurante() {
-		res= new Restaurante("1A","Antonio","Tomás","Aquino Hayquienviva", "Calle Desengaño 21 3ºA", "600000000", "", "");
-       restaurantecontroller.create(res);
-       
+	   Restaurante res= new Restaurante("1A","El molino","Comidas Manchegas S.L","A1B2C3D4", "Calle Desengaño 7", "656987125", "elmolinno@gmail.com", "Comida tradicional");
+		Restaurante res4= new Restaurante("1T","Tomas","Tomás","Aquino Hayquienviva", "Calle Desengaño 26 3ºA", "600000008", "restaurant2@gmail.es", "Categoria ejemplo");
+		Restaurante res2= new Restaurante("1B","Paco","Tomás","Aquino Hayquienviva", "Calle Desengaño 26 3ºA", "600000008", "restaurante", "Categoria ejemplo");
+		Restaurante res3= new Restaurante("1C","Juan","Tomás","Aquino Hayquienviva", "Calle Desengaño 23 3ºA", "60000787887487847", "restaurante@prueba.com", "Categoria ejemplo");
+
+		assertNotEquals(null,restaurantecontroller.create(res));
+		assertNotEquals(null,restaurantecontroller.create(res2));
+		assertNotEquals(null,restaurantecontroller.create(res3));
+      
+      }
+   
+   @Test
+   void testObtenerRestaurante() {
+
+		restaurantecontroller.obtenerRestaurante("6362513747774a5c1af31a36");
       
       }
    
 	@Test
 	   void testActualizarRestaurante(){
-	       restaurantecontroller.update("1A", res);
-	       Restaurante res2= new Restaurante("1A","Antonio","Tomás","Toledo", "Calle Desengaño 21 3ºA", "600000000", "h", "h");
-		   Restaurante res3= new Restaurante("1A","Antonio","Tomás","kkk@gmail.com", "Calle Desengaño 21 3ºAa", "620000000", "h", "h");
-		   restaurantecontroller.update("1A",res2);
-		   restaurantecontroller.update("1A",res3);
 
-	       assertEquals(res2.toString(),restaurantecontroller.update("1A", res2).toString());
+
+	       assertEquals(res.getEmail(),restaurantecontroller.update("6362513747774a5c1af31a36", res).getEmail());
+	       assertEquals("tlfFormErr",restaurantecontroller.update("6362513747774a5c1af31a36", res3).getEmail());
 
 	      
 
 	   }
+	
+	
 	@Test
 	void testIndex() {
 		List<Restaurante> list=restaurantecontroller.index();
-		assertEquals(4,list.size());
+		assertNotEquals(0,list.size());
 	}
 		
 		@Test
 	   void testEliminarRestaurante(){
+			
 	       restaurantecontroller.delete("1A");
 
 	       assertThrows(RuntimeException.class,() ->{restauranteRepository.findById("1A").orElseThrow(RuntimeException::new);});

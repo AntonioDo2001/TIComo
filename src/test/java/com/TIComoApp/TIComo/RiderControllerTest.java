@@ -1,5 +1,6 @@
 package com.TIComoApp.TIComo;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -30,40 +31,67 @@ public class RiderControllerTest {
    private RiderController ridercontroller;
    
   
-   Rider res=new Rider("1A","Antonio","Tomás","aaa@gmail.com", "waza", "620000000", "", "", "");
-
+   Rider res=new Rider("11111","Antonio","Tomás","aaa@gmail.com", "wazaasdasdasdasdasd1A", "62000000A", "Coche", "4444AAA", "Coche");
+   Rider res2= new Rider("11112","Antonio","Tomás","bbb@gmail.com", "wazaasdasdasdasdasd1B", "62000000B", "Moto", "4444SAB", "Coche");
+   Rider res3= new Rider("11113","Antonio","Tomás","www@gmail.com", "wazaasdasdasdasdasd1C", "62000000C", "Moto", "4444BBBB", "Coche");
+   Rider res4= new Rider("11113","Antonio","Tomás","www@gmail", "wazaasdasdasdasdasd1C", "62000000D", "Moto", "4444BBB", "Coche");
+   Rider res5= new Rider("11114","Antonio","Tomás","www@gmail", "waza", "62000000D", "Moto", "4444BBB", "Coche");
+   
    @Rule
    public ExpectedException exception = ExpectedException.none();
   
    @Test
    void testCrearRider() {
-	   res=new Rider("1A","Antonio","Tomás","Aquino Hayquienviva", "Calle Desengaño 21 3ºA", "600000000", "", "", "");
        ridercontroller.create(res);
+	   ridercontroller.create(res2);
+	   ridercontroller.create(res3);
+	   ridercontroller.create(res4);
+	   ridercontroller.create(res5);
        
       
       }
    
 	@Test
-	 void testActualizarRider(){
-		   Rider res2= new Rider("1A2","Antonio","Tomás","bbb@gmail.com", "222222aB", "620000000", "", "4444AAAA", "");
-		   Rider res3= new Rider("1A3","Antonio","Tomás","www@gmail", "222222aB", "620000000", "", "4444BBBB", "");
-		   ridercontroller.update("1A2",res2);
-	       ridercontroller.update("1A3",res3);
+	 void testObtnerRider(){
 
-	       assertEquals(res2.toString(),ridercontroller.update("1A2", res2).toString());
+
+		   ridercontroller.obtenerRider("11111");
+
 
 	}
+   
+   
+   
+	@Test
+	 void testActualizarRider(){
+
+
+		   ridercontroller.update("11111",res2);
+
+	       assertEquals(res2.getNIF(),ridercontroller.update("11111", res2).getNIF());
+	       assertEquals("emailFormato",ridercontroller.update("11111", res4).getNIF());
+	       assertEquals("errorMatricula",ridercontroller.update("11111", res3).getNIF());
+	       assertEquals("errorPassword",ridercontroller.update("11111", res5).getNIF());
+
+
+	}
+	@Test
+	void testDesactivarActivarRider() {
+		Rider rid =ridercontroller.desactivarActivarRider(res);
+		assertEquals(true,rid.isCuentaActiva());
+	}
+	
 	
 	@Test
 	void testIndex() {
 		List<Rider> list=ridercontroller.index();
-		assertEquals(4,list.size());
+		assertNotEquals(0,list.size());
 	}
 		
 	@Test
 	 void testEliminarRider(){
-	   ridercontroller.delete("1A");
-	   assertThrows(RuntimeException.class,() ->{riderRepository.findById("1A").orElseThrow(RuntimeException::new);});
+	   ridercontroller.delete("11112");
+	   assertThrows(RuntimeException.class,() ->{riderRepository.findById("11112").orElseThrow(RuntimeException::new);});
 
 
 	   }

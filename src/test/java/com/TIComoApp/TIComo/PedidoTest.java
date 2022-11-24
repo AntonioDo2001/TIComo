@@ -26,7 +26,7 @@ public class PedidoTest {
 		ejemplo.setPedidoRealizado(false);
 		ejemplo2.setPedidoRealizado(false);
 		ejemplo.setNombreRestaurante("casaudillo");
-		ejemplo2.setNombreRestaurante("casadauillo");
+		ejemplo2.setNombreRestaurante("casaudillo");
 		
 		
 		assertEquals(ejemplo.getId(),ejemplo2.getId());
