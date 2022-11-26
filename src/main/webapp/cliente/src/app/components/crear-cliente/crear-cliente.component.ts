@@ -88,7 +88,6 @@ export class CrearClienteComponent implements OnInit {
           }
         }, error => {
           console.log(error);
-          this.clienteForm.reset();
           this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR CLIENTE');
         })
       } else{

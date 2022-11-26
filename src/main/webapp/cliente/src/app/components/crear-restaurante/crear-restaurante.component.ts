@@ -86,7 +86,6 @@ export class CrearRestauranteComponent implements OnInit {
   
         }, error => {
           console.log(error);
-          this.restauranteForm.reset();
           this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR RESTAURANTE');
         })
 

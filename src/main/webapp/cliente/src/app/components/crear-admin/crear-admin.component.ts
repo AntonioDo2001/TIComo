@@ -78,7 +78,6 @@ export class CrearAdminComponent implements OnInit {
   
         }, error => {
           console.log(error);
-          this.adminForm.reset();
           this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR ADMINISTRADOR');
         })
       } else{

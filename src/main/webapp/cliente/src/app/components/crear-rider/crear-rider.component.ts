@@ -87,7 +87,6 @@ export class CrearRiderComponent implements OnInit {
   
         }, error => {
           console.log(error);
-          this.riderForm.reset();
           this.toastr.error('Datos introducidos erroneos!!', 'ERROR AL GUARDAR RIDER');
         })
       } else{
