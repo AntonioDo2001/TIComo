@@ -165,11 +165,8 @@ public class ClienteController {
 					emailRepetido = true;
 				}
 			}
-			if(emailRepetido) {
-				return new Cliente(ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL,ERREMAIL);
-			}
 			
-			else if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
+			if(!cliente.formatoCorreoCorrecto(cliente.getEmail())){
 				return new Cliente(EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR,EMFORMERR);	
 			}
 			else if(!cliente.telefonoValido(cliente.getTelefono())) {

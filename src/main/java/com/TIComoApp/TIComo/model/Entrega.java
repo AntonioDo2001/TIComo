@@ -72,6 +72,9 @@ public class Entrega {
 		DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm:ss z");
 		this.fechayhora = dateFormat.format(new Date());
 	}
+	public Entrega() {
+		
+	}
 
 	//Getters, Setters y toString
 	public String getId() {

@@ -40,6 +40,10 @@ public class Rider extends Usuario{
 		this.carnet = carnet;
 		this.valoracionMedia = 0.0;
 	}
+	
+	public Rider() {
+		
+	}
 	//Getters, Setters y toString
 	public String getNIF() {
 		return NIF;

@@ -48,6 +48,9 @@ public class Plato {
 		this.aptoVeganos = aptoVeganos;
 		this.nombreRestaurante = nombreRestaurante;
 	}
+	public Plato() {
+		
+	}
 
 	//Getters, Setters y toString
 	public String getId() {

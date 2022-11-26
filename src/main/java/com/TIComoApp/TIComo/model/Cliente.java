@@ -38,6 +38,10 @@ public class Cliente extends Usuario{
 		this.telefono = telefono;
 	}
 	
+	public Cliente() {
+		
+	}
+	
 	//Getters, Setters y toString
 	public String getNIF() {
 		return NIF;

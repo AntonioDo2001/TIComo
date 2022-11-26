@@ -53,6 +53,9 @@ public class Usuario {
 		this.cuentaActiva = true;
 
 	}
+	public Usuario() {
+		
+	}
 
 
 

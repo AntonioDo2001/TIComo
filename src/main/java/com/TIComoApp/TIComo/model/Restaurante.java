@@ -52,6 +52,10 @@ public class Restaurante {
 		this.email = email;
 		this.categoria = categoria;
 	}
+	
+	public Restaurante() {
+		
+	}
 
 	//Getters, Setters y toString
 	public String getId() {

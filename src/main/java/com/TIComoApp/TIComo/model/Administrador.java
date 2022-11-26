@@ -31,6 +31,9 @@ public class Administrador extends Usuario{
 		super(id, nombre, apellidos, email, password);
 		this.zona = zona;
 	}
+	public Administrador(){
+		
+	}
 	//Getters, Setters y toString
 	public String getZona() {
 		return zona;
